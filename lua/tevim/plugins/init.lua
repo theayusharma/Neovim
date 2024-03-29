@@ -17,7 +17,7 @@ local plugins = {
 		"nvim-neo-tree/neo-tree.nvim",
 		cmd = "Neotree",
 		keys = { { mode = { "n", "v" }, "<C-e>", "<cmd>Neotree toggle<cr>", desc = "NeoTree" } },
-		branch = "v3.x",
+		commit = "8afbb06081ce1e4beb5b18945d14a608b10babeb",
 		deactivate = function()
 			vim.cmd([[Neotree close]])
 		end,
