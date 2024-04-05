@@ -15,12 +15,12 @@ return {
 	["@module"] = { fg = colors.base08 },
 	["@reference"] = { fg = colors.base05 },
 
-	["@function"] = { fg = colors.base0D },
-	["@function.builtin"] = { fg = colors.base0D },
-	["@function.macro"] = { fg = colors.base08 },
-	["@function.call"] = { fg = colors.base0D },
-	["@function.method"] = { fg = colors.base0D },
-	["@function.method.call"] = { fg = colors.base0D },
+	["@function"] = { fg = colors.base0D, bold = true },
+	["@function.builtin"] = { fg = colors.base0D, bold = true },
+	["@function.macro"] = { fg = colors.base08, bold = true },
+	["@function.call"] = { fg = colors.base0D, bold = true },
+	["@function.method"] = { fg = colors.base0D, bold = true },
+	["@function.method.call"] = { fg = colors.base0D, bold = true },
 
 	["@punctuation.bracket"] = { fg = colors.base0F },
 	["@punctuation.delimiter"] = { fg = colors.base0F },
