@@ -1,3 +1,4 @@
+vim.loader.enable()
 local options = {
 	number = true,
 	relativenumber = false,
@@ -21,6 +22,7 @@ local options = {
 	termguicolors = true,
 	timeoutlen = 300,
 	updatetime = 200,
+	smoothscroll = true,
 	fillchars = { eob = " ", foldopen = "", foldsep = " ", foldclose = "", lastline = " " },
 	listchars = "tab:  ",
 	background = "light",
@@ -88,10 +90,6 @@ for _, provider in ipairs({ "node", "perl", "python3", "ruby" }) do
 end
 
 for k, v in pairs(options) do
-	if vim.fn.has("nvim-0.10") == 1 then
-		vim.loader.enable()
-		vim.opt.smoothscroll = true
-	end
 	vim.opt[k] = v
 end
 
