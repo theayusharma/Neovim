@@ -56,7 +56,7 @@ local plugins = {
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		version = "2.20.7",
+		main = "ibl",
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			{
