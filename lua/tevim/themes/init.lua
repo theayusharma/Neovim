@@ -98,6 +98,9 @@ end
 M.load = function()
 	compile()
 	dofile(vim.g.themeCache .. "allThemes")
+	pcall(function()
+		require("ibl").update()
+	end)
 end
 
 M.setTermColors = function(colors)

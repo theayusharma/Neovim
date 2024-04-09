@@ -22,7 +22,6 @@ local options = {
 	termguicolors = true,
 	timeoutlen = 300,
 	updatetime = 200,
-	smoothscroll = true,
 	fillchars = { eob = " ", foldopen = "", foldsep = " ", foldclose = "", lastline = " " },
 	listchars = "tab:  ",
 	background = "light",
