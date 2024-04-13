@@ -168,11 +168,9 @@ local lsp = function()
 	local add_client = function(filetype)
 		local clients = {}
 		for _, client in pairs(buf_clients) do
-			if client.name ~= "copilot" then
-				if client.config.filetypes ~= nil then
-					if vim.tbl_contains(client.config.filetypes, filetype) then
-						table.insert(clients, client.name)
-					end
+			if client.config.filetypes ~= nil then
+				if vim.tbl_contains(client.config.filetypes, filetype) then
+					table.insert(clients, client.name)
 				end
 			end
 		end
@@ -200,11 +198,11 @@ local copilot = function()
 		return ""
 	end
 	for _, client in pairs(vim.lsp.get_active_clients()) do
-		if client.name == "copilot" then
+		if client.name == "GitHub Copilot" then
 			return "%#TeSTTCopilot#" .. "    "
 		end
 	end
-	return "%#TeSTTCopilot#" .. "     "
+	return "%#TeSTTCopilot#" .. "    "
 end
 
 local codeium = function()
