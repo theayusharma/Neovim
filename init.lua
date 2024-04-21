@@ -4,7 +4,9 @@
 ------------------------------- WELCOME TO TEVIM -------------------------------
 -- WARNING: THIS IS A PERSONAL CONFIGURATION NOT A DISTRO, YOU CAN USE DEFAULT CONFIGURATION OR CUSTOMIZE IT
 
-require("tevim.core")
+require("tevim.core.options")
+require("tevim.core.keymaps")
+require("tevim.core.autocmds")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

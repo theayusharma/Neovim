@@ -23,7 +23,7 @@ local devicons_present, devicons = pcall(require, "nvim-web-devicons")
 local createTab = function(buf)
 	if devicons_present then
 		local filename = (#vim.api.nvim_buf_get_name(buf) ~= 0)
-				and vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
+			and vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
 			or ""
 		local icon, icon_hl = devicons.get_icon(filename)
 		if not icon then
@@ -186,7 +186,7 @@ local tebufilter = function()
 	end
 	for i = #bufs, 1, -1 do
 		local filename = (#vim.api.nvim_buf_get_name(bufs[i]) ~= 0)
-				and vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufs[i]), ":t")
+			and vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufs[i]), ":t")
 			or ""
 		if
 			not vim.api.nvim_buf_is_valid(bufs[i])

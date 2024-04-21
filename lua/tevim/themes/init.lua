@@ -82,7 +82,7 @@ local compile = function()
 		end
 	end
 	for k, f in
-		pairs(M.loadCustomTb(vim.fn.fnamemodify(vim.fn.stdpath("config") .. "/lua/custom/themes/integrations", ":r")))
+	pairs(M.loadCustomTb(vim.fn.fnamemodify(vim.fn.stdpath("config") .. "/lua/custom/themes/integrations", ":r")))
 	do
 		for _, i in pairs(allThemes) do
 			if i == f then

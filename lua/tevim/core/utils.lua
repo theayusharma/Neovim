@@ -27,6 +27,14 @@ function M.replaceword(middle, old, new, file)
 	vim.fn.writefile(new_lines, file)
 end
 
+function M.toggle_inlayHints()
+	if not vim.lsp.inlay_hint.is_enabled() then
+		vim.lsp.inlay_hint.enable(true)
+	else
+		vim.lsp.inlay_hint.enable(false)
+	end
+end
+
 function M.toggle_option(option)
 	local value = not vim.api.nvim_get_option_value(option, {})
 	vim.opt[option] = value
@@ -44,22 +52,22 @@ function M.build_run()
 	if filetype == "c" then
 		vim.cmd(
 			"TermExec cmd='gcc "
-				.. vim.fn.expand("%")
-				.. " -o "
-				.. vim.fn.expand("%:r")
-				.. " && "
-				.. vim.fn.expand("%:r")
-				.. "'"
+			.. vim.fn.expand("%")
+			.. " -o "
+			.. vim.fn.expand("%:r")
+			.. " && "
+			.. vim.fn.expand("%:r")
+			.. "'"
 		)
 	elseif filetype == "cpp" then
 		vim.cmd(
 			"TermExec cmd='g++ "
-				.. vim.fn.expand("%")
-				.. " -o "
-				.. vim.fn.expand("%:r")
-				.. " && "
-				.. vim.fn.expand("%:r")
-				.. "'"
+			.. vim.fn.expand("%")
+			.. " -o "
+			.. vim.fn.expand("%:r")
+			.. " && "
+			.. vim.fn.expand("%:r")
+			.. "'"
 		)
 	elseif filetype == "python" then
 		vim.cmd("TermExec cmd='python3 " .. vim.fn.expand("%") .. "'")
@@ -160,6 +168,7 @@ M.checkMason = function()
 	end
 	if #remove > 0 then
 		vim.cmd("MasonUninstall " .. table.concat(remove, " "))
+		vim.notify("Uninstalled " .. table.concat(remove, ", "))
 	end
 	if #missing > 0 then
 		vim.cmd("MasonInstall " .. table.concat(missing, " "))
@@ -174,20 +183,20 @@ M.CreateCustom = function()
 	if vim.fn.isdirectory(path) ~= 1 then
 		vim.fn.mkdir(path, "p")
 		io.open(path .. "/init.lua", "w"):write(
-			'local M = {}\n\nM.keymaps = require("custom.keymaps")\nM.options = require("custom.options")\n\nreturn M'
+			'require("custom.keymaps")\nrequire("custom.options")'
 		)
 		io.open(path .. "/plugins.lua", "w"):write(
 			'local overrides = require("custom.configs.overrides")\n\nreturn {\n\t-- add plugins or override my plugins in here\n}'
 		)
+		io.open(path .. "/options.lua", "w"):write("-- add options or override my options in here")
+		io.open(path .. "/keymaps.lua", "w"):write("-- add your custom keymaps in here")
 		vim.fn.mkdir(path .. "/configs", "p")
 		io.open(path .. "/configs/overrides.lua", "w"):write(
 			"local M = {}\n\n-- add overrides in here(eg: mason.nvim)\nM.mason = {\n\tensure_installed = {}\n}\n\nreturn M"
 		)
-		io.open(path .. "/options.lua", "w"):write("-- add options or override my options in here")
-		io.open(path .. "/keymaps.lua", "w"):write("-- add your keymaps in here")
 		vim.fn.mkdir(path .. "/themes/schemes", "p")
 		io.open(path .. "/themes/integrations.lua", "w"):write(
-			'local colors = require("tevim.themes").getCurrentTheme()\n\nreturn {\n\t-- add your highlights in here\n}'
+			'local colors = require("tevim.themes").getCurrentTheme()\n\nreturn {\n\t-- add your custom highlights in here\n}'
 		)
 		vim.notify("Created custom folder. Please read the docs!")
 	end
