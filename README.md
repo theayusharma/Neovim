@@ -32,20 +32,21 @@ On Battery                            : 17ms - 21ms
 
 ## 🔎 Requirements
 
-- Neovim >= v0.9.4 (Recommend nightly version).
+- Neovim >= v0.9 (Recommend nightly version).
 
 - Nerd Font as your terminal font.
 
-- Ripgrep and Fzf are required for grep searching with Telescope.
+- `Ripgrep` and `Fzf` are required for grep searching with Telescope.
 
-- GCC (Clang), Windows users must have mingw installed and set on path.
+- `GCC (Clang)`, **Windows** users must have `mingw` installed and set on PATH.
 
-- Lazygit and Ranger (OPTIONAL).
+- `Lazygit` and `Ranger` (OPTIONAL).
 
-- Xsel and Xclip for copy and paste (X11), wl-clipboard (Wayland) (OPTIONAL).
+- `Xsel` and `Xclip` for copy and paste (X11), `wl-clipboard` (Wayland) (OPTIONAL).
 
 ## ⬇️  Installation
 
+### Linux
 - Backup your config
   ```zsh
   mv ~/.config/nvim ~/.config/nvim.bak
@@ -59,11 +60,25 @@ On Battery                            : 17ms - 21ms
   git clone https://github.com/sownteedev/TeVim ~/.config/nvim --depth 1 && nvim
   ```
 
-### Adding Mason to path
-```zsh
-# this is for zsh
-export PATH=$PATH:~/.local/share/nvim/mason/bin
-```
+- Adding Mason to PATH
+  ```zsh
+  # this is for zsh
+  export PATH=$PATH:~/.local/share/nvim/mason/bin
+  ```
+
+### Windows (PowerShell)
+- Backup your config
+  ```powershell
+  Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
+  ```
+- Remove cache setup
+  ```powershell
+  Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
+  ```
+- Install TeVim
+  ```powershell
+  git clone https://github.com/sownteedev/TeVim $env:LOCALAPPDATA\nvim --depth 1 && nvim
+  ```
 
 ### Custom Colorschemes
 > Read my colorschemes in tevim/themes/schemes/ and write like it on custom/themes/schemes/
