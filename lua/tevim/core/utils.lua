@@ -174,6 +174,9 @@ M.CreateCustom = function()
 	local path = vim.fn.stdpath("config") .. "/lua/custom"
 	if vim.fn.isdirectory(path) ~= 1 then
 		vim.fn.mkdir(path, "p")
+		io.open(path .. "/init.lua", "w"):write(
+			'require("custom.keymaps")\nrequire("custom.options")'
+		)
 		io.open(path .. "/plugins.lua", "w"):write(
 			'local overrides = require("custom.configs.overrides")\n\nreturn {\n\t-- add plugins or override my plugins in here\n}'
 		)
