@@ -27,14 +27,6 @@ function M.replaceword(middle, old, new, file)
 	vim.fn.writefile(new_lines, file)
 end
 
-function M.toggle_inlayHints()
-	if not vim.lsp.inlay_hint.is_enabled() then
-		vim.lsp.inlay_hint.enable(true)
-	else
-		vim.lsp.inlay_hint.enable(false)
-	end
-end
-
 function M.toggle_option(option)
 	local value = not vim.api.nvim_get_option_value(option, {})
 	vim.opt[option] = value
