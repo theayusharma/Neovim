@@ -277,9 +277,11 @@ local plugins = {
 	},
 }
 
-local check, _ = pcall(require, "custom")
+local check, _ = pcall(require, "custom.plugins")
 if check then
-	require("custom")
+	require("custom.options")
+	require("custom.keymaps")
+	require("custom.autocmds")
 	local custom_plugins = require("custom.plugins")
 	if #custom_plugins > 0 then
 		for _, plugin in ipairs(custom_plugins) do
