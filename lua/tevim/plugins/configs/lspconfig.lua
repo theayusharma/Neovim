@@ -5,7 +5,7 @@ local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 M.inlay_hints = true
 
-M.on_attach = function(bufnr)
+M.on_attach = function(_, bufnr)
 	if M.inlay_hints then
 		vim.lsp.inlay_hint.enable(true)
 	end
