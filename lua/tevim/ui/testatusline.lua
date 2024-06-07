@@ -188,9 +188,10 @@ local lsp = function()
 
 	-- RETURN CLIENTS
 	if #buf_client_names > 3 then
-		return "%#TeSTTLsp#" .. " " .. buf_client_names[1] .. ", " .. buf_client_names[2] .. ", " .. buf_client_names[3]
+		return "%#TeSTTLsp#" ..
+			" " .. buf_client_names[1] .. ", " .. buf_client_names[2] .. ", " .. buf_client_names[3] .. " "
 	end
-	return "%#TeSTTLsp#" .. " " .. table.concat(vim.fn.uniq(buf_client_names), ", ")
+	return "%#TeSTTLsp#" .. " " .. table.concat(vim.fn.uniq(buf_client_names), ", ") .. " "
 end
 
 local copilot = function()
@@ -199,10 +200,10 @@ local copilot = function()
 	end
 	for _, client in pairs(vim.lsp.get_active_clients()) do
 		if client.name == "GitHub Copilot" then
-			return "%#TeSTTCopilot#" .. "    "
+			return "%#TeSTTCopilot#" .. "  "
 		end
 	end
-	return "%#TeSTTCopilot#" .. "    "
+	return "%#TeSTTCopilot#" .. "   "
 end
 
 local codeium = function()
