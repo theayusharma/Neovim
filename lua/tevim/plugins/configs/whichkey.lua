@@ -48,7 +48,6 @@ return {
 		},
 		f = {
 			name = "  TELESCOPE",
-			c = { "<cmd>TeVimThemes<cr>", "TeVim Themes" },
 			f = { "<cmd>Telescope find_files<cr>", "Find File" },
 			r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
 			w = { "<cmd>Telescope live_grep<cr>", "Find Text" },
@@ -106,6 +105,7 @@ return {
 			u = { "<cmd>TeVimUpdate<cr>", "Update TeVim" },
 			m = { "<cmd>TeVimCheckMason<cr>", "Check Mason" },
 			t = { "<cmd>TeVimToggleTrans<cr>", "Toggle Transparency" },
+			c = { "<cmd>TeVimThemes<cr>", "TeVim Themes" },
 		},
 	},
 

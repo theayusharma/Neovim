@@ -15,9 +15,9 @@ M.on_attach = function(_, bufnr)
 	}, bufnr)
 end
 
-M.capabilities =
-	vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), cmp_nvim_lsp.default_capabilities())
-
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 M.capabilities.offsetEncoding = { "utf-16", "utf-8" }
 
 vim.diagnostic.config({

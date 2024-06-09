@@ -166,7 +166,6 @@ On Battery                            : 17ms - 21ms
 | <kbd>LDR</kbd> <kbd>f</kbd> <kbd>r</kbd> | Find Recently Visited Files |
 | <kbd>LDR</kbd> <kbd>f</kbd> <kbd>w</kbd> | Find File By String |
 | <kbd>LDR</kbd> <kbd>f</kbd> <kbd>t</kbd> | TODO |
-| <kbd>LDR</kbd> <kbd>f</kbd> <kbd>c</kbd> | TeVim Colorscheme Picker |
 
 #### LSP
 
@@ -189,8 +188,9 @@ On Battery                            : 17ms - 21ms
 | Keys        | Function          |
 | ------------- |-------------|
 | <kbd>LDR</kbd> <kbd>LDR</kbd> <kbd>u</kbd> | TeVim Update |
-| <kbd>LDR</kbd> <kbd>LDR</kbd> <kbd>m</kbd> | TeVim Check Mason |
+| <kbd>LDR</kbd> <kbd>LDR</kbd> <kbd>c</kbd> | TeVim Colorscheme Picker |
 | <kbd>LDR</kbd> <kbd>LDR</kbd> <kbd>t</kbd> | Toggle Transparency |
+| <kbd>LDR</kbd> <kbd>LDR</kbd> <kbd>m</kbd> | TeVim Check Mason |
 
 <br>
 
