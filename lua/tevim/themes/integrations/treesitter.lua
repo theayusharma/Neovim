@@ -73,6 +73,7 @@ return {
 	["@markup.italic"] = { italic = true },
 	["@markup.quote"] = { bg = colors.lighter },
 	["@markup.strikethrough"] = { strikethrough = true },
+	["@markup.underline"] = { underline = true },
 
 	["@comment"] = { link = "Comment" },
 	["@comment.todo"] = { fg = utils.blend(colors.foreground, colors.background, 0.2), bg = colors.foreground },

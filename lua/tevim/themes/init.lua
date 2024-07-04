@@ -4,8 +4,16 @@ M.getCurrentTheme = function()
 	local check1, default_theme = pcall(require, "tevim.themes.schemes." .. vim.g.TeVimTheme)
 	local check2, custom_theme = pcall(require, "custom.themes.schemes." .. vim.g.TeVimTheme)
 	if check1 then
+		local precent = default_theme.type == "light" and -5 or 3
+		local color = require("tevim.core.utils").change_hex_lightness(default_theme.background, precent)
+		default_theme.lighter = color
+		default_theme.darker = require("tevim.core.utils").change_hex_lightness(default_theme.background, -3)
 		return default_theme
 	elseif check2 then
+		local precent = custom_theme.type == "light" and -5 or 3
+		local color = require("tevim.core.utils").change_hex_lightness(custom_theme.background, precent)
+		custom_theme.lighter = color
+		custom_theme.darker = require("tevim.core.utils").change_hex_lightness(custom_theme.background, -3)
 		return custom_theme
 	end
 end
@@ -17,11 +25,7 @@ end
 
 M.loadCustomTb = function(g)
 	local check, _ = pcall(require, "custom.themes.integrations")
-	if check then
-		g = require("custom.themes.integrations")
-	else
-		g = {}
-	end
+	g = check and require("custom.themes.integrations") or {}
 	return g
 end
 

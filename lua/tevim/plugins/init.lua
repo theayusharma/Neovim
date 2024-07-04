@@ -293,6 +293,7 @@ end
 require("lazy").setup(plugins, {
 	defaults = { lazy = true },
 	ui = {
+		backdrop = 100,
 		icons = {
 			ft = "",
 			lazy = "󰂠 ",

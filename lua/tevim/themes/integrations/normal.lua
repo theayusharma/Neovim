@@ -68,6 +68,10 @@ return {
 	SpellRare = { undercurl = true, sp = colors.base0E },
 	healthSuccess = { bg = colors.green, fg = colors.background },
 
+	Added = { fg = colors.green },
+	Removed = { fg = colors.red },
+	Changed = { fg = utils.mix(colors.red, colors.green, 0.5) },
+
 	Bold = { bold = true },
 	Italic = { italic = true },
 	TooLong = { fg = colors.base08 },

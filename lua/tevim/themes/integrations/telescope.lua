@@ -1,17 +1,18 @@
 local colors = require("tevim.themes").getCurrentTheme()
+local utils = require("tevim.core.utils")
 
 return {
 	TelescopeNormal = { bg = colors.darker },
 	TelescopeBorder = { fg = colors.darker, bg = colors.darker },
 
+	TelescopePromptTitle = { fg = colors.background, bg = colors.red },
 	TelescopePromptBorder = { fg = colors.lighter, bg = colors.lighter },
 	TelescopePromptNormal = { fg = colors.foreground, bg = colors.lighter },
-	TelescopePromptTitle = { fg = colors.black, bg = colors.red },
 
-	TelescopePreviewTitle = { fg = colors.lighter, bg = colors.blue },
+	TelescopePreviewTitle = { fg = colors.background, bg = colors.blue },
 	TelescopePreviewBorder = { bg = colors.darker, fg = colors.darker },
 
-	TelescopeResultsTitle = { fg = colors.lighter, bg = colors.green },
+	TelescopeResultsTitle = { fg = colors.background, bg = colors.green },
 	TelescopeResultsBorder = { bg = colors.darker, fg = colors.darker },
 
 	TelescopeMatching = { bold = true },

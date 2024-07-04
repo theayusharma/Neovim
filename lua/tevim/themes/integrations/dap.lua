@@ -17,7 +17,7 @@ return {
 	DapUIDecoration = { fg = utils.mix(colors.foreground, colors.blue, 0.7) },
 	DapUIThread = { fg = colors.green },
 	DapUIStoppedThread = { fg = utils.mix(colors.foreground, colors.blue, 0.7) },
-	DapUISource = { fg = colors.lavender },
+	DapUISource = { fg = utils.mix(colors.foreground, colors.blue, 0.7) },
 	DapUILineNumber = { fg = utils.mix(colors.foreground, colors.blue, 0.7) },
 	DapUIFloatBorder = { fg = utils.mix(colors.foreground, colors.blue, 0.7) },
 

@@ -10,8 +10,9 @@ return {
 	DiagnosticWarn = { fg = utils.mix(colors.red, colors.green, 0.5) },
 	DiagnosticInfo = { fg = colors.blue },
 	DiagnosticHint = { fg = utils.mix(colors.red, colors.blue, 0.5) },
+
 	LspInlayHint = { fg = utils.blend(colors.foreground, colors.background, 0.25), bg = utils.blend(colors.background, colors.foreground, 0.95) },
 	LspSignatureActiveParameter = { fg = colors.foreground, bg = colors.blue },
 
-	SymbolUsageText = { fg = utils.blend(colors.foreground, colors.background, 0.25), italic = true },
+	SymbolUsageText = { fg = utils.blend(colors.foreground, colors.background, 0.4), italic = true },
 }
