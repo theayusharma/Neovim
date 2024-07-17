@@ -46,7 +46,7 @@ On Battery                            : 17ms - 21ms
 
 ## ⬇️  Installation
 
-### Linux
+#### Linux
 - Backup your config
   ```zsh
   mv ~/.config/nvim ~/.config/nvim.bak
@@ -66,7 +66,7 @@ On Battery                            : 17ms - 21ms
   export PATH=$PATH:~/.local/share/nvim/mason/bin
   ```
 
-### Windows (PowerShell)
+#### Windows (PowerShell)
 - Backup your config
   ```powershell
   Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
@@ -80,10 +80,10 @@ On Battery                            : 17ms - 21ms
   git clone https://github.com/sownteedev/TeVim $env:LOCALAPPDATA\nvim --depth 1 && nvim
   ```
 
-### Custom Colorschemes
-> Read my colorschemes in tevim/themes/schemes/ and write like it on custom/themes/schemes/
+#### Custom Colorschemes
+> Read file colorschemes on tevim/themes/schemes/ and write like it on custom/themes/schemes/
 
-### TeVim Commands
+#### TeVim Commands
 > **TeVimThemes** : Open list colorschemes
 >
 > **TeVimToggleTrans** : Toggle Transparency
@@ -94,7 +94,7 @@ On Battery                            : 17ms - 21ms
 
 <br>
 
-<h5> ENJOY WITH TEVIM ! 🎉 </h5>
+<h3> ENJOY WITH TEVIM ! 🎉 </h3>
 
 <br>
 
@@ -119,7 +119,6 @@ On Battery                            : 17ms - 21ms
 | [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)         | more devicons for neovim                                       | `true`  |
 | [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                   | automatically close and rename html tags                       | `true`  |
 | [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                     | automatically close and rename brackets                        | `true`  |
-| [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                       | shows all the posiible vim keybindings, perfect for dummies    | `true`  |
 | [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)     | probably the most popular menu. can be used for a lot of stuff | `true`  |
 | [akinsho/toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)                 | terminal integration in neovim                                 | `true`  |
 | [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                 | Super fast git decorations implemented purely in Lua.          | `true`  |
@@ -128,7 +127,6 @@ On Battery                            : 17ms - 21ms
 | [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                     | the most popular LSP client for neovim                         | `true`  |
 | [hrsh7th/nvim-cmp](https:://github.com/hrsh7th/nvim-cmp)                              | autocompletion plugin for neovim                               | `true`  |
 | [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)                               | very simple and easy to use snippet engine                     | `true`  |
-| [kevinhwang91/nvim-ufo](https://github.com/kevinhwang91/nvim-ufo)                     | folds in neovim arent that bad! actually, better than vscode   | `true`  |
 | [RRethy/vim-illuminate](https://github.com/RRethy/vim-illuminate)                     | highlights all instances of the word under the cursor          | `true`  |
 | [lukas-reineke/indent-blankline.nvim](https:://github.com/lukas-reineke/indent-blankline.nvim)| shows indent lines in neovim                           | `true`  |
 | [echasnovski/mini.indentscope](https:://github.com/echasnovski/mini.indentscope)      | perfect animation indent lines                                 | `true`  |
@@ -194,7 +192,7 @@ On Battery                            : 17ms - 21ms
 
 <br>
 
-> Use **Space** to open which-key and use more keybindings
+> Use **Telescope keymaps** for more keybinds
 
 <br>
 

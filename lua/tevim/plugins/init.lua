@@ -69,18 +69,6 @@ local plugins = {
 		end,
 	},
 	{
-		"folke/which-key.nvim",
-		keys = { "<leader>", " ", "'", "`" },
-		cmd = "WhichKey",
-		opts = function()
-			return require("tevim.plugins.configs.whichkey")
-		end,
-		config = function(_, opts)
-			require("which-key").setup(opts.setup)
-			require("which-key").register(opts.mappings, opts.opts)
-		end,
-	},
-	{
 		"numToStr/Comment.nvim",
 		keys = {
 			{ mode = "n", "<C-/>", "<Plug>(comment_toggle_linewise_current)",      desc = "Toggle Comment" },
@@ -182,37 +170,17 @@ local plugins = {
 		end,
 	},
 	{
-		"kevinhwang91/nvim-ufo",
+		"luukvbaal/statuscol.nvim",
 		event = { "BufReadPost", "BufNewFile" },
-		dependencies = {
-			{
-				"luukvbaal/statuscol.nvim",
-				dependencies = "kevinhwang91/promise-async",
-				config = function()
-					local builtin = require("statuscol.builtin")
-					require("statuscol").setup({
-						ft_ignore = { "neo-tree", "Outline" },
-						segments = {
-							{ sign = { namespace = { "diagnostic*" } } },
-							{ sign = { namespace = { "gitsign" } },    click = "v:lua.ScSa" },
-							{ text = { builtin.lnumfunc, "  " },       click = "v:lua.ScLa" },
-							{ text = { builtin.foldfunc, "  " },       click = "v:lua.ScFa" },
-						},
-					})
-				end,
-			},
-		},
-		init = function()
-			vim.o.foldcolumn = "1"
-			vim.o.foldlevel = 99
-			vim.o.foldlevelstart = 99
-			vim.o.foldenable = true
-		end,
 		config = function()
-			require("ufo").setup({
-				provider_selector = function()
-					return { "treesitter", "indent" }
-				end,
+			local builtin = require("statuscol.builtin")
+			require("statuscol").setup({
+				ft_ignore = { "neo-tree", "Outline" },
+				segments = {
+					{ sign = { namespace = { "diagnostic*" } } },
+					{ sign = { namespace = { "gitsign" } },    click = "v:lua.ScSa" },
+					{ text = { builtin.lnumfunc, "   " },      click = "v:lua.ScLa" },
+				},
 			})
 		end,
 	},

@@ -1,4 +1,8 @@
 return {
+	pickers = {
+		find_files = { hidden = true },
+		find_grep = { hidden = true },
+	},
 	defaults = {
 		layout_config = {
 			horizontal = {
