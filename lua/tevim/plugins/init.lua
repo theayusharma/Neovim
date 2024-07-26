@@ -135,12 +135,19 @@ local plugins = {
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
-		event = "BufRead",
+		event = { "BufReadPost", "BufNewFile" },
 		opts = function()
 			vim.defer_fn(function()
 				require("colorizer").attach_to_buffer(0)
 			end, 0)
 			return require("colorizer").setup()
+		end,
+	},
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = function()
+			return require("tevim.plugins.configs.whichkey")
 		end,
 	},
 	{
@@ -179,9 +186,25 @@ local plugins = {
 				segments = {
 					{ sign = { namespace = { "diagnostic*" } } },
 					{ sign = { namespace = { "gitsign" } },    click = "v:lua.ScSa" },
-					{ text = { builtin.lnumfunc, "   " },      click = "v:lua.ScLa" },
+					{ text = { builtin.lnumfunc, "  " },       click = "v:lua.ScLa" },
+					{ text = { builtin.foldfunc, "  " },       click = "v:lua.ScFa" },
 				},
 			})
+		end,
+	},
+	{
+		"kevinhwang91/nvim-ufo",
+		event = { "BufReadPost", "BufNewFile" },
+		commit = "aa2e676af592b4e99c105d80d6eafd1afc215d99",
+		dependencies = "kevinhwang91/promise-async",
+		init = function()
+			vim.o.foldcolumn = "1"
+			vim.o.foldlevel = 99
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+		end,
+		config = function()
+			require("ufo").setup()
 		end,
 	},
 
