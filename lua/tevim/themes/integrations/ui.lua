@@ -6,27 +6,27 @@ return {
 	TeBufOnActive = { fg = colors.foreground, bg = colors.background, bold = true },
 	TeBufOnInactive = {
 		fg = utils.blend(colors.foreground, colors.background, 0.2),
-		bg = utils.blend(colors.foreground, colors.background, 0.02),
+		bg = utils.blend(colors.foreground, colors.background, 0.03),
 	},
 	TeBufFolderOnActive = { fg = colors.foreground, bg = colors.background, italic = true },
 	TeBufFolderOnInactive = {
 		fg = utils.blend(colors.foreground, colors.background, 0.2),
-		bg = utils.blend(colors.foreground, colors.background, 0.02),
+		bg = utils.blend(colors.foreground, colors.background, 0.03),
 		italic = true,
 	},
 	TeBufOnModified = { fg = colors.green },
 	TeBufOffModified = {
 		fg = utils.blend(colors.foreground, colors.background, 0.2),
-		bg = utils.blend(colors.foreground, colors.background, 0.02),
+		bg = utils.blend(colors.foreground, colors.background, 0.03),
 	},
 	TeBufOnClose = { fg = colors.red, bg = colors.background },
 	TeBufOffClose = {
 		fg = utils.blend(colors.foreground, colors.background, 0.2),
-		bg = utils.blend(colors.foreground, colors.background, 0.02),
+		bg = utils.blend(colors.foreground, colors.background, 0.03),
 	},
 	TeBufTree = { bg = colors.darker },
 	TeBufEmpty = { bg = colors.background },
-	TeBufEmptyColor = { bg = utils.blend(colors.foreground, colors.background, 0.01) },
+	TeBufEmptyColor = { bg = utils.blend(colors.foreground, colors.background, 0.015) },
 	TeBufCloseButton = { bg = colors.red, fg = colors.background },
 
 	TeBufRun = {
@@ -68,7 +68,7 @@ return {
 	TeSTTFileName = { fg = colors.red, bg = utils.blend(colors.red, colors.background, 0.1), bold = true },
 	TeSTTFolder = { fg = colors.red, bg = utils.blend(colors.red, colors.background, 0.1), italic = true },
 
-	TeSTTNothing = { bg = utils.blend(colors.foreground, colors.background, 0.03) },
+	TeSTTNothing = { bg = utils.blend(colors.foreground, colors.background, 0.015) },
 	TeSTTNothing2 = { bg = colors.background },
 
 	TeSTTLsp = { fg = colors.green, bg = utils.blend(colors.green, colors.background, 0.1) },

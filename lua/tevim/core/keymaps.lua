@@ -1,11 +1,11 @@
 local opts = { noremap = true, silent = true }
 local map = vim.keymap.set
 
-map({ "n", "v" }, "<C-a>", "ggVG", opts, { desc = "Select All" })
+map({ "n", "v", "i" }, "<C-a>", "<ESC>ggVG", opts, { desc = "Select All" })
 map("v", "<C-c>", "y", opts, { desc = "Copy" })
 map({ "n", "i" }, "<C-v>", "<ESC>pa", opts, { desc = "Paste" })
 map({ "n", "v" }, "<C-x>", "d", opts, { desc = "Cut" })
-map({ "n", "v" }, "<C-z>", "<cmd>undo<CR>", opts, { desc = "Undo" })
+map({ "n", "v", "i" }, "<C-z>", "<cmd>undo<CR>", opts, { desc = "Undo" })
 
 map(
 	"n",

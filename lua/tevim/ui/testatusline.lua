@@ -253,38 +253,59 @@ local progress = function()
 	end
 end
 
-local nothing = vim.o.columns < 120 and "%#TeSTTNothing2#" .. "   " or "%#TeSTTNothing#" .. "   "
+local countBuffer = function()
+	local counter = 0
+	for _, buf in pairs(vim.api.nvim_list_bufs()) do
+		local filenames = vim.api.nvim_buf_get_name(buf):match("^.+/(.+)$") or ""
+		if
+			vim.api.nvim_buf_is_valid(buf)
+			and vim.api.nvim_buf_is_loaded(buf)
+			and vim.bo[buf].buflisted
+			and filenames ~= ""
+		then
+			counter = counter + 1
+		end
+	end
+	return counter
+end
+
+local nothing = function()
+	if vim.o.columns < 120 or countBuffer() < 2 then
+		return "%#TeSTTNothing2#" .. "    "
+	end
+	return "%#TeSTTNothing#" .. "    "
+end
 
 M.run = function()
 	if vim.o.columns < 120 then
 		return table.concat({
-			nothing,
+			nothing(),
 			"%=",
 			mode(),
-			nothing,
+			nothing(),
 			diagnostics(),
 		})
 	end
 	return table.concat({
 		mode(),
-		nothing,
+		nothing(),
 		filename(),
-		nothing,
+		nothing(),
 		branch(),
-		nothing,
+		nothing(),
 		diff(),
-		nothing,
+		nothing(),
 		"%=",
 		diagnostics(),
 		lsp(),
 		copilot(),
 		codeium(),
 		tabnine(),
-		nothing,
+		nothing(),
 		tab(),
-		nothing,
+		nothing(),
 		progress(),
-		nothing,
+		nothing(),
 		location(),
 	})
 end
