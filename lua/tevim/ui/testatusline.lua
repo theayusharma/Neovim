@@ -155,7 +155,7 @@ local diagnostics = function()
 end
 
 local lsp = function()
-	local buf_clients = vim.lsp.get_active_clients()
+	local buf_clients = vim.lsp.get_clients()
 	if not buf_clients then
 		return ""
 	end
@@ -198,7 +198,7 @@ local copilot = function()
 	if not is_available("copilot.vim") and not is_available("copilot.lua") then
 		return ""
 	end
-	for _, client in pairs(vim.lsp.get_active_clients()) do
+	for _, client in pairs(vim.lsp.get_clients()) do
 		if client.name == "GitHub Copilot" then
 			return "%#TeSTTCopilot#" .. "  "
 		end
