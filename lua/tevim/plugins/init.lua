@@ -13,47 +13,76 @@ local plugins = {
 			return require("tevim.plugins.configs.devicons")
 		end,
 	},
+	-- {
+	-- 	"nvim-neo-tree/neo-tree.nvim",
+	-- 	cmd = "Neotree",
+	-- 	keys = { { mode = { "n", "v" }, "<C-e>", "<cmd>Neotree toggle<cr>", desc = "NeoTree" } },
+	-- 	commit = "8afbb06081ce1e4beb5b18945d14a608b10babeb",
+	-- 	deactivate = function()
+	-- 		vim.cmd([[Neotree close]])
+	-- 	end,
+	-- 	init = function()
+	-- 		vim.g.neo_tree_remove_legacy_commands = 1
+	-- 		if vim.fn.argc(-1) == 1 then
+	-- 			local stat = vim.loop.fs_stat(vim.fn.argv(0))
+	-- 			if stat and stat.type == "directory" then
+	-- 				require("neo-tree")
+	-- 			end
+	-- 		end
+	-- 	end,
+	-- 	opts = function()
+	-- 		return require("tevim.plugins.configs.neotree")
+	-- 	end,
+	-- },
+		
+	-- {
+	-- 	"nvim-treesitter/nvim-treesitter",
+	-- 	event = { "BufReadPost", "BufNewFile" },
+	-- 	cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo", "TSUninstall", "TSUpdate" },
+	-- 	build = ":TSUpdate",
+	-- 	dependencies = {
+	-- 		"HiPhish/rainbow-delimiters.nvim",
+	-- 		{
+	-- 			"windwp/nvim-ts-autotag",
+	-- 			ft = { "html", "javascript", "jsx", "typescript", "tsx", "svelte", "vue", "xml", "markdown" },
+	-- 			opts = { enable_close_on_slash = false },
+	-- 		},
+	-- 	},
+	-- 	opts = function()
+	-- 		return require("tevim.plugins.configs.treesitter")
+	-- 	end,
+	-- 	config = function(_, opts)
+	-- 		require("nvim-treesitter.configs").setup(opts)
+	-- 	end,
+	-- },
 	{
-		"nvim-neo-tree/neo-tree.nvim",
-		cmd = "Neotree",
-		keys = { { mode = { "n", "v" }, "<C-e>", "<cmd>Neotree toggle<cr>", desc = "NeoTree" } },
-		commit = "8afbb06081ce1e4beb5b18945d14a608b10babeb",
-		deactivate = function()
-			vim.cmd([[Neotree close]])
-		end,
-		init = function()
-			vim.g.neo_tree_remove_legacy_commands = 1
-			if vim.fn.argc(-1) == 1 then
-				local stat = vim.loop.fs_stat(vim.fn.argv(0))
-				if stat and stat.type == "directory" then
-					require("neo-tree")
-				end
+	"nvim-neo-tree/neo-tree.nvim",
+	branch = "v3.x", -- Use stable branch instead of specific commit
+	cmd = "Neotree",
+	keys = { 
+		{ "<C-e>", "<cmd>Neotree toggle<cr>", desc = "NeoTree", mode = { "n", "v" } }
+	},
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-tree/nvim-web-devicons",
+		"MunifTanjim/nui.nvim",
+	},
+	deactivate = function()
+		vim.cmd([[Neotree close]])
+	end,
+	init = function()
+		-- Handle opening a directory
+		if vim.fn.argc(-1) == 1 then
+			local stat = vim.uv.fs_stat(vim.fn.argv(0))
+			if stat and stat.type == "directory" then
+				require("neo-tree")
 			end
-		end,
-		opts = function()
-			return require("tevim.plugins.configs.neotree")
-		end,
-	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPost", "BufNewFile" },
-		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo", "TSUninstall", "TSUpdate" },
-		build = ":TSUpdate",
-		dependencies = {
-			"HiPhish/rainbow-delimiters.nvim",
-			{
-				"windwp/nvim-ts-autotag",
-				ft = { "html", "javascript", "jsx", "typescript", "tsx", "svelte", "vue", "xml", "markdown" },
-				opts = { enable_close_on_slash = false },
-			},
-		},
-		opts = function()
-			return require("tevim.plugins.configs.treesitter")
-		end,
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
-		end,
-	},
+		end
+	end,
+	opts = function()
+		return require("tevim.plugins.configs.neotree")
+	end,
+},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
@@ -108,31 +137,58 @@ local plugins = {
 			return require("tevim.plugins.configs.telescope")
 		end,
 	},
+	-- {
+	-- 	"lewis6991/gitsigns.nvim",
+	-- 	ft = { "gitcommit", "diff" },
+	-- 	init = function()
+	-- 		vim.api.nvim_create_autocmd({ "BufRead" }, {
+	-- 			group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
+	-- 			callback = function()
+	-- 				vim.fn.jobstart({ "git", "-C", vim.loop.cwd(), "rev-parse" }, {
+	-- 					on_exit = function(_, return_code)
+	-- 						if return_code == 0 then
+	-- 							vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
+	-- 							vim.schedule(function()
+	-- 								require("lazy").load({ plugins = { "gitsigns.nvim" } })
+	-- 							end)
+	-- 						end
+	-- 					end,
+	-- 				})
+	-- 			end,
+	-- 			desc = "Load gitsigns only if git repository",
+	-- 		})
+	-- 	end,
+	-- 	opts = function()
+	-- 		return require("tevim.plugins.configs.gitsign")
+	-- 	end,
+	-- },
 	{
-		"lewis6991/gitsigns.nvim",
-		ft = { "gitcommit", "diff" },
-		init = function()
-			vim.api.nvim_create_autocmd({ "BufRead" }, {
-				group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
-				callback = function()
-					vim.fn.jobstart({ "git", "-C", vim.loop.cwd(), "rev-parse" }, {
-						on_exit = function(_, return_code)
-							if return_code == 0 then
-								vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
-								vim.schedule(function()
-									require("lazy").load({ plugins = { "gitsigns.nvim" } })
-								end)
-							end
-						end,
-					})
-				end,
-				desc = "Load gitsigns only if git repository",
-			})
-		end,
-		opts = function()
-			return require("tevim.plugins.configs.gitsign")
-		end,
-	},
+	"lewis6991/gitsigns.nvim",
+	ft = { "gitcommit", "diff" },
+	init = function()
+		vim.api.nvim_create_autocmd({ "BufRead" }, {
+			group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
+			callback = function()
+				-- Use vim.uv instead of vim.loop (updated API)
+				vim.fn.jobstart({ "git", "-C", vim.uv.cwd(), "rev-parse" }, {
+					on_exit = function(_, return_code)
+						if return_code == 0 then
+							-- Safe deletion with error handling
+							pcall(vim.api.nvim_del_augroup_by_name, "GitSignsLazyLoad")
+							vim.schedule(function()
+								require("lazy").load({ plugins = { "gitsigns.nvim" } })
+							end)
+						end
+					end,
+				})
+			end,
+			desc = "Load gitsigns only if git repository",
+		})
+	end,
+	opts = function()
+		return require("tevim.plugins.configs.gitsign")
+	end,
+},
 	{
 		"NvChad/nvim-colorizer.lua",
 		event = { "BufReadPost", "BufNewFile" },

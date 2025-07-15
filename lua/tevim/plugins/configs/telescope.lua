@@ -32,14 +32,26 @@ return {
 		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 		buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 		mappings = {
-			i = {
-				["<C-j>"] = require("telescope.actions").move_selection_next,
-				["<C-k>"] = require("telescope.actions").move_selection_previous,
-				["<C-q>"] = require("telescope.actions").smart_send_to_qflist
-					+ require("telescope.actions").open_qflist,
-				["<esc>"] = require("telescope.actions").close,
-				["<CR>"] = require("telescope.actions").select_default + require("telescope.actions").center,
-			},
-		},
-	},
+  i = {
+    ["<C-j>"] = require("telescope.actions").move_selection_next,
+    ["<C-k>"] = require("telescope.actions").move_selection_previous,
+    ["<C-q>"] = require("telescope.actions").smart_send_to_qflist
+      + require("telescope.actions").open_qflist,
+    ["<esc>"] = require("telescope.actions").close,
+    ["<CR>"] = function(prompt_bufnr)
+      local actions = require("telescope.actions")
+      local action_state = require("telescope.actions.state")
+      local entry = action_state.get_selected_entry()
+      actions.close(prompt_bufnr)
+      if entry.filename and entry.lnum then
+        vim.cmd("edit " .. entry.filename)
+        vim.schedule(function()
+          vim.fn.cursor(entry.lnum, entry.col or 1)
+        end)
+      else
+        vim.cmd("edit " .. entry.filename)
+      end
+    end,
+  },
+},	},
 }
