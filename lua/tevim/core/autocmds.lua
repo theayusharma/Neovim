@@ -140,6 +140,15 @@ autocmd({ "BufNewFile", "BufRead" }, {
 		end
 	end,
 })
+
+autocmd({ "BufNewFile", "BufRead" }, {
+	pattern = { "*.cpp", "*.cxx", "*.cc" },
+	callback = function()
+		vim.bo.filetype = "cpp"
+	end,
+	desc = "Set filetype to cpp for C++ files",
+})
+
 autocmd("UIEnter", {
 	callback = function()
 		if vim.g.loadTeVimTheme then

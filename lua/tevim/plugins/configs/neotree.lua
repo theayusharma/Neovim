@@ -30,7 +30,18 @@ return {
 			},
 		},
 	},
-	window = { width = 30 },
+	window = {
+		width = 30,
+		-- win_options = { relativenumber = true, number = true }
+	},
+	event_handlers = {
+		{
+			event = "neo_tree_window_after_open",
+			handler = function(args)
+				vim.cmd("setlocal relativenumber number")
+			end,
+		},
+	},
 	filesystem = {
 		filtered_items = { hide_dotfiles = false, hide_gitignored = false },
 		follow_current_file = { enabled = true },

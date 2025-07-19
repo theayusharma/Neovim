@@ -35,26 +35,26 @@ local plugins = {
 	-- 	end,
 	-- },
 		
-	-- {
-	-- 	"nvim-treesitter/nvim-treesitter",
-	-- 	event = { "BufReadPost", "BufNewFile" },
-	-- 	cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo", "TSUninstall", "TSUpdate" },
-	-- 	build = ":TSUpdate",
-	-- 	dependencies = {
-	-- 		"HiPhish/rainbow-delimiters.nvim",
-	-- 		{
-	-- 			"windwp/nvim-ts-autotag",
-	-- 			ft = { "html", "javascript", "jsx", "typescript", "tsx", "svelte", "vue", "xml", "markdown" },
-	-- 			opts = { enable_close_on_slash = false },
-	-- 		},
-	-- 	},
-	-- 	opts = function()
-	-- 		return require("tevim.plugins.configs.treesitter")
-	-- 	end,
-	-- 	config = function(_, opts)
-	-- 		require("nvim-treesitter.configs").setup(opts)
-	-- 	end,
-	-- },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPost", "BufNewFile" },
+		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo", "TSUninstall", "TSUpdate" },
+		build = ":TSUpdate",
+		dependencies = {
+			"HiPhish/rainbow-delimiters.nvim",
+			{
+				"windwp/nvim-ts-autotag",
+				ft = { "html", "javascript", "jsx", "typescript", "tsx", "svelte", "vue", "xml", "markdown" },
+				opts = { enable_close_on_slash = false },
+			},
+		},
+		opts = function()
+			return require("tevim.plugins.configs.treesitter")
+		end,
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end,
+	},
 	{
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x", -- Use stable branch instead of specific commit

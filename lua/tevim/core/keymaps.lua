@@ -129,3 +129,6 @@ map({ "n", "v" }, "<Leader><Leader>u", "<cmd>TeVimUpdate<CR>", opts, { desc = "U
 map({ "n", "v" }, "<Leader><Leader>m", "<cmd>TeVimCheckMason<CR>", opts, { desc = "Check Mason" })
 map({ "n", "v" }, "<Leader><Leader>t", "<cmd>TeVimToggleTrans<CR>", opts, { desc = "Toggle Transparency" })
 map({ "n", "v" }, "<Leader><Leader>c", "<cmd>TeVimThemes<CR>", opts, { desc = "TeVim Themes" })
+
+-- Run Code:
+map({ "n", "v", "i" }, "<M-q>", "<cmd>lua require('tevim.core.utils').build_run()<CR>", opts, { desc = "Run Code" })
