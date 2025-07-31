@@ -1,6 +1,7 @@
 local overrides = require("custom.configs.overrides")
 
-return { 
+return {
+  { "echasnovski/mini.nvim", version = false },
   {
     "mattn/emmet-vim",
     ft = { "html", "css", "javascript", "typescript", "jsx", "tsx" },
@@ -37,7 +38,11 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
   config = function()
-    require("mason").setup()
+    require("mason").setup({
+      ensure_installed = {
+        "tree-sitter-cli",
+      },
+    })
     require("mason-lspconfig").setup({
       ensure_installed = { "tailwindcss", "pyright", "gopls", "rust_analyzer", "clangd" }, -- removed tsserver from here
     })
@@ -145,4 +150,21 @@ end,
     require("typescript-tools").setup {}
   end,
 },
+{
+  "kawre/leetcode.nvim",
+  dependencies = {
+    "nvim-telescope/telescope.nvim", -- optional but recommended
+    "nvim-lua/plenary.nvim",         -- required
+    "MunifTanjim/nui.nvim",          -- UI
+    "nvim-treesitter/nvim-treesitter" -- syntax highlighting
+  },
+  opts = {
+    -- optional: set defaults here
+    lang = "cpp" -- or "python", "golang", etc.
+  },
+  config = function(_, opts)
+    require("leetcode").setup(opts)
+  end
+}
+,
 }

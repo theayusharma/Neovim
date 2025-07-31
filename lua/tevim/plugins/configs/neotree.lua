@@ -32,6 +32,10 @@ return {
 	},
 	window = {
 		width = 30,
+		win_options = {
+      relativenumber = true,
+      number = true,
+    },
 		-- win_options = { relativenumber = true, number = true }
 	},
 	event_handlers = {
