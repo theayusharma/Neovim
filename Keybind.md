@@ -4,6 +4,7 @@
 
 | Key         | Description                      |
 |-------------|----------------------------------|
+| `<A-Tab>`   | Switch Buffers                   |
 | `<C-a>`     | Select All                       |
 | `<C-c>`     | Copy                             |
 | `<C-v>`     | Paste                            |
