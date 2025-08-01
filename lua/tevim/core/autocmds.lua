@@ -141,6 +141,7 @@ autocmd({ "BufNewFile", "BufRead" }, {
 	end,
 })
 
+
 autocmd({ "BufNewFile", "BufRead" }, {
 	pattern = { "*.cpp", "*.cxx", "*.cc" },
 	callback = function()

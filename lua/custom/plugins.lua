@@ -1,11 +1,53 @@
 local overrides = require("custom.configs.overrides")
 
 return {
-  { "echasnovski/mini.nvim", version = false },
-  {
-    "mattn/emmet-vim",
-    ft = { "html", "css", "javascript", "typescript", "jsx", "tsx" },
-  },
+{
+ "echasnovski/mini.nvim", 
+ version = false,
+ config = function()
+   require('mini.pairs').setup()
+ end
+},
+
+{
+ "mattn/emmet-vim",
+ ft = { "html", "css", "javascript", "typescript", "jsx", "tsx" },
+},
+
+{
+ "windwp/nvim-autopairs",
+ event = "InsertEnter",
+ config = function()
+   require("nvim-autopairs").setup({
+     check_ts = true,
+     ts_config = {
+       lua = {'string'},
+       javascript = {'template_string'},
+       java = false,
+     }
+   })
+ end,
+},
+
+{
+  "windwp/nvim-ts-autotag",
+  dependencies = "nvim-treesitter/nvim-treesitter",
+  ft = { "html", "javascript", "typescript", "jsx", "tsx", "vue", "svelte" },
+  config = function()
+    require('nvim-ts-autotag').setup({
+      opts = {
+        enable_close = true,
+        enable_rename = true,
+        enable_close_on_slash = false
+      },
+      per_filetype = {
+        ["html"] = {
+          enable_close = true
+        }
+      }
+    })
+  end,
+},
 
   -- {
   --   -- Tailwind CSS LSP
@@ -93,7 +135,12 @@ return {
       "saadparwaiz1/cmp_luasnip",
     },
     config = function()
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       local cmp = require('cmp')
+      cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done()
+      )
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -167,4 +214,13 @@ end,
   end
 }
 ,
+{
+  "nvim-treesitter/nvim-treesitter",
+  config = function()
+    require("nvim-treesitter.configs").setup {
+      ensure_installed = { "html" },
+      indent = { enable = true },
+    }
+  end,
+}
 }
