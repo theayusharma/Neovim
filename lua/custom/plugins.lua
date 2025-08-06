@@ -49,32 +49,7 @@ return {
   end,
 },
 
-  -- {
-  --   -- Tailwind CSS LSP
-  --   "neovim/nvim-lspconfig",
-  --   dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-  --   config = function()
-  --     require("mason").setup()
-  --     require("mason-lspconfig").setup({
-  --       ensure_installed = { "tailwindcss", "tsserver", "pyright", "gopls", "rust_analyzer" }
-  --     })
-  --     
-  --     local lspconfig = require("lspconfig")
-  --     local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  --     
-  --     -- LSP Servers setup
-  --     lspconfig.tailwindcss.setup({})
-  --     lspconfig.tsserver.setup({
-  --       capabilities = capabilities,
-  --       on_attach = function(client)
-  --         client.server_capabilities.documentFormattingProvider = false
-  --       end,
-  --     })
-  --     lspconfig.pyright.setup({ capabilities = capabilities })
-  --     lspconfig.gopls.setup({ capabilities = capabilities })
-  --     lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-  --   end
-  -- },
+  
 
 {
   "neovim/nvim-lspconfig",
@@ -83,48 +58,42 @@ return {
     require("mason").setup({
       ensure_installed = {
         "tree-sitter-cli",
+        "pyright",
+        "gopls",
+        "rust_analyzer",
+        "clangd",
+        "tailwindcss-language-server",
       },
     })
-    require("mason-lspconfig").setup({
-      ensure_installed = { "tailwindcss", "pyright", "gopls", "rust_analyzer", "clangd" }, -- removed tsserver from here
-    })
 
-    local lspconfig = require("lspconfig")
+    require("mason-lspconfig").setup()
+
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local lspconfig = require("lspconfig")
 
-    -- tailwindcss setup
-    lspconfig.tailwindcss.setup({})
-
-    -- -- tsserver using global binary
-    -- lspconfig.tsserver.setup({
-    --   cmd = { "typescript-language-server", "--stdio" },
-    --   capabilities = capabilities,
-    --   on_attach = function(client)
-    --     client.server_capabilities.documentFormattingProvider = false
-    --   end,
-    -- })
-
-    -- other servers
     lspconfig.pyright.setup({ capabilities = capabilities })
     lspconfig.gopls.setup({ capabilities = capabilities })
     lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+    lspconfig.clangd.setup({ capabilities = capabilities })
+
+    lspconfig.tailwindcss.setup({
+      capabilities = capabilities,
+      root_dir = function(fname)
+        local root_pattern = require("lspconfig").util.root_pattern(
+          "tailwind.config.cjs",
+          "tailwind.config.js",
+          "postcss.config.js"
+        )
+        return root_pattern(fname)
+      end,
+      filetypes = { "html", "javascript", "typescript", "jsx", "tsx", "vue", "svelte", "css" },
+    })
   end
 },
-  {
-    -- Tailwind CSS color preview
-    "NvChad/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup({
-        user_default_options = {
-          tailwind = true,  -- Enable Tailwind CSS color highlighting
-          mode = "background",
-        }
-      })
-    end
-  },
+
+  
 
   {
-    -- Autocompletion plugins
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -133,6 +102,17 @@ return {
       "hrsh7th/cmp-cmdline",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
+      "onsails/lspkind-nvim",
+      {
+        "luckasRanarison/tailwind-tools.nvim",
+        config = function()
+          require("tailwind-tools").setup({
+            server = {
+              override = false,
+            },
+          })
+        end,
+      },
     },
     config = function()
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
@@ -141,6 +121,8 @@ return {
         'confirm_done',
         cmp_autopairs.on_confirm_done()
       )
+
+      local lspkind = require("lspkind")
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -158,7 +140,12 @@ return {
           { name = 'luasnip' },
         }, {
           { name = 'buffer' },
-        })
+        }),
+        formatting = {
+          format = lspkind.cmp_format({
+            before = require("tailwind-tools.cmp").lspkind_format,
+          }),
+        },
       })
     end
   },
