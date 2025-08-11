@@ -189,16 +189,7 @@ local plugins = {
 		return require("tevim.plugins.configs.gitsign")
 	end,
 },
-	{
-		"NvChad/nvim-colorizer.lua",
-		event = { "BufReadPost", "BufNewFile" },
-		opts = function()
-			vim.defer_fn(function()
-				require("colorizer").attach_to_buffer(0)
-			end, 0)
-			return require("colorizer").setup()
-		end,
-	},
+	
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",

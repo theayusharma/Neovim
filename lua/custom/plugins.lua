@@ -209,5 +209,17 @@ end,
       indent = { enable = true },
     }
   end,
-}
+},
+  {
+    -- Tailwind CSS color preview
+    "NvChad/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({
+        user_default_options = {
+          tailwind = true,  -- Enable Tailwind CSS color highlighting
+          mode = "background",
+        }
+      })
+    end
+  }
 }
