@@ -15,3 +15,4 @@ vim.keymap.set("n", "<A-Tab>", function()
     end,
   })
 end, { desc = "Switch buffers" })
+vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select all" })

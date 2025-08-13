@@ -7,6 +7,7 @@
 require("tevim.core.options")
 require("tevim.core.keymaps")
 require("tevim.core.autocmds")
+require("custom")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -25,3 +26,4 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("tevim.plugins")
+require("custom")
