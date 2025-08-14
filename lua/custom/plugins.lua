@@ -245,4 +245,38 @@ end,
 		  vim.g.neoformat_run_all_formatters = 1
 		end,
 	  },
+    {
+      'smoka7/multicursors.nvim',
+      event = 'VeryLazy',
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+        'nvim-lua/plenary.nvim',
+        'nvimtools/hydra.nvim',
+      },
+      opts = {
+        generate_hints = {
+          normal = true,
+          insert = true,
+          extend = true,
+        },
+      },
+      cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor', 'MCword' },
+      config = function(_, opts)
+        require('multicursors').setup(opts)
+      end,
+      keys = {
+        {
+          '<C-d>',
+          '<cmd>MCstart<cr>',
+          mode = 'n',
+          desc = 'Start multicursor on word',
+        },
+        {
+          '<C-d>',
+          '<cmd>MCvisual<cr>',
+          mode = 'v',
+          desc = 'Start multicursor on visual selection',
+        },
+      },
+    },
 }
