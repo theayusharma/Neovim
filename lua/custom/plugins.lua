@@ -13,21 +13,6 @@ return {
  "mattn/emmet-vim",
  ft = { "html", "css", "javascript", "typescript", "jsx", "tsx" },
 },
-
--- {
---  "windwp/nvim-autopairs",
---  event = "InsertEnter",
---  config = function()
---    require("nvim-autopairs").setup({
---      check_ts = true,
---      ts_config = {
---        lua = {'string'},
---        javascript = {'template_string'},
---        java = false,
---      }
---    })
---  end,
--- },
 {
 		"windwp/nvim-autopairs",
 		-- event = "InsertEnter",
@@ -61,108 +46,6 @@ return {
   end,
 },
 
--- {
---   "neovim/nvim-lspconfig",
---   dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
---   config = function()
---     require("mason").setup({
---       ensure_installed = {
---         "tree-sitter-cli",
---         "pyright",
---         "gopls",
---         "rust_analyzer",
---         "clangd",
---         "tailwindcss-language-server",
---       },  
---         automatic_installation = true,
---     })
---
---     require("mason-lspconfig").setup()
---
---     local capabilities = require('cmp_nvim_lsp').default_capabilities()
---     local lspconfig = require("lspconfig")
---
---     lspconfig.pyright.setup({ capabilities = capabilities })
---     lspconfig.gopls.setup({ capabilities = capabilities })
---     lspconfig.rust_analyzer.setup({ capabilities = capabilities })
---     lspconfig.clangd.setup({ capabilities = capabilities })
---
---     lspconfig.tailwindcss.setup({
---       capabilities = capabilities,
---       root_dir = function(fname)
---         local root_pattern = require("lspconfig").util.root_pattern(
---           "tailwind.config.cjs",
---           "tailwind.config.js",
---           "postcss.config.js"
---         )
---         return root_pattern(fname)
---       end,
---       filetypes = { "html", "javascript", "typescript", "jsx", "tsx", "vue", "svelte", "css" },
---     })
---   end
--- },
-  {
-    "hrsh7th/nvim-cmp",
-    -- event = "InsertEnter",
-    dependencies = {
-      "windwp/nvim-autopairs",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-      "onsails/lspkind-nvim",
-      {
-        "luckasRanarison/tailwind-tools.nvim",
-        config = function()
-          require("tailwind-tools").setup({
-            server = {
-              override = false,
-            },
-          })
-        end,
-      },
-    },
-    config = function()
-      -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-      local cmp = require('cmp')
-      -- cmp.event:on(
-      --   'confirm_done',
-      --   cmp_autopairs.on_confirm_done()
-      -- )
-      local ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
-    if ok then
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-    end
-
-      local lspkind = require("lspkind")
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
-          ['<Tab>'] = cmp.mapping.select_next_item(),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-        }),
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-        }, {
-          { name = 'buffer' },
-        }),
-        formatting = {
-          format = lspkind.cmp_format({
-            before = require("tailwind-tools.cmp").lspkind_format,
-          }),
-        },
-      })
-    end
-  },
 {
 "s1n7ax/nvim-window-picker",
 version = "v1.*",
@@ -188,19 +71,20 @@ end,
     "nvim-lua/plenary.nvim",
     "neovim/nvim-lspconfig",
   },
+  ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
   config = function()
-    require("typescript-tools").setup {}
+    require("typescript-tools").setup {
+      on_attach = function(client, bufnr)
+        -- Optional: Add keymaps or other setup here
+        print("TypeScript Tools attached to buffer " .. bufnr)
+      end,
+      settings = {
+        separate_diagnostic_server = true,
+        publish_diagnostic_on = "insert_leave",
+      }
+    }
   end,
 },
--- {
---   "nvim-treesitter/nvim-treesitter",
---   config = function()
---     require("nvim-treesitter.configs").setup {
---       ensure_installed = { "html" },
---       indent = { enable = true },
---     }
---   end,
--- },
 {
     "catgoose/nvim-colorizer.lua",
     event = { "BufReadPre", "BufNewFile" },
@@ -262,38 +146,121 @@ end,
 	-- 	  vim.g.neoformat_run_all_formatters = 1
 	-- 	end,
 	--   },
-    {
-      'smoka7/multicursors.nvim',
-      event = 'VeryLazy',
-      dependencies = {
-        'nvim-treesitter/nvim-treesitter',
-        'nvim-lua/plenary.nvim',
-        'nvimtools/hydra.nvim',
-      },
-      opts = {
-        generate_hints = {
-          normal = true,
-          insert = true,
-          extend = true,
-        },
-      },
-      cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor', 'MCword' },
-      config = function(_, opts)
-        require('multicursors').setup(opts)
-      end,
-      keys = {
-        {
-          '<C-d>',
-          '<cmd>MCstart<cr>',
-          mode = 'n',
-          desc = 'Start multicursor on word',
-        },
-        {
-          '<C-d>',
-          '<cmd>MCvisual<cr>',
-          mode = 'v',
-          desc = 'Start multicursor on visual selection',
-        },
-      },
+-- {
+--   'smoka7/multicursors.nvim',
+--   event = 'VeryLazy',
+--   dependencies = {
+--     'nvim-treesitter/nvim-treesitter',
+--     'nvim-lua/plenary.nvim',
+--     'nvimtools/hydra.nvim',
+--   },
+--   opts = {
+--     -- Enable hints (this is the key setting!)
+--     generate_hints = {
+--       normal = true,
+--       insert = true, 
+--       extend = true,
+--       config = {
+--         column_count = 1,           -- Single column for cleaner look
+--         max_hint_length = 30,       -- Longer descriptions
+--       }
+--     },
+--     -- Customize hint window appearance
+--     hint_config = {
+--       float_opts = {
+--         border = 'rounded',         -- Nice border
+--       },
+--       position = 'bottom-right',    -- Position like which-key
+--     },
+--     -- Keep default keymaps simple
+--     normal_keys = {},  -- Use defaults
+--     insert_keys = {},  -- Use defaults  
+--     extend_keys = {},  -- Use defaults
+--   },
+--   cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor', 'MCword' },
+--   keys = {
+--     -- Simple VS Code-like keybindings
+--     {
+--       '<C-n>',
+--       '<cmd>MCstart<cr>',
+--       mode = 'n',
+--       desc = 'Add cursor on word',
+--     },
+--     {
+--       '<C-n>',
+--       '<cmd>MCvisual<cr>',
+--       mode = 'v', 
+--       desc = 'Add cursor on selection',
+--     },
+--     {
+--       '<leader>ma',
+--       '<cmd>MCpattern<cr>',
+--       mode = 'n',
+--       desc = 'Add cursors by pattern',
+--     },
+--     {
+--       '<leader>mc',
+--       '<cmd>MCclear<cr>',
+--       mode = 'n',
+--       desc = 'Clear all cursors',
+--     },
+--   },
+-- },
+
+  {
+    "jake-stewart/multicursor.nvim",
+    branch = "1.0",
+    keys = {
+      { "<C-n>", mode = { "n", "x" } },
+      { "<S-C-n>", mode = { "n", "x" } },
+      { "<leader>s", mode = { "n", "x" } },
+      { "<leader>S", mode = { "n", "x" } },
+      { "<Up>", mode = { "n", "x" } },
+      { "<Down>", mode = { "n", "x" } },
+      { "<leader><Up>", mode = { "n", "x" } },
+      { "<leader><Down>", mode = { "n", "x" } },
+      { "<C-q>", mode = { "n", "x" } },
+      { "<Left>", mode = { "n", "x" } },
+      { "<Right>", mode = { "n", "x" } },
+      { "<leader>x", mode = { "n", "x" } },
+      { "<C-LeftMouse>", mode = { "n" } },
+      { "<C-LeftDrag>", mode = { "n" } },
+      { "<C-LeftRelease>", mode = { "n" } },
     },
+    config = function()
+      local mc = require("multicursor-nvim")
+      mc.setup()
+
+      local set = vim.keymap.set
+      set({ "n", "x" }, "<C-n>", function() mc.matchAddCursor(1) end)
+      set({ "n", "x" }, "<S-C-n>", function() mc.matchAddCursor(-1) end)
+
+      set({ "n", "x" }, "<leader>s", function() mc.matchSkipCursor(1) end)
+      set({ "n", "x" }, "<leader>S", function() mc.matchSkipCursor(-1) end)
+
+      set({ "n", "x" }, "<Up>", function() mc.lineAddCursor(-1) end)
+      set({ "n", "x" }, "<Down>", function() mc.lineAddCursor(1) end)
+      set({ "n", "x" }, "<leader><Up>", function() mc.lineSkipCursor(-1) end)
+      set({ "n", "x" }, "<leader><Down>", function() mc.lineSkipCursor(1) end)
+
+      set("n", "<C-LeftMouse>", mc.handleMouse)
+      set("n", "<C-LeftDrag>", mc.handleMouseDrag)
+      set("n", "<C-LeftRelease>", mc.handleMouseRelease)
+
+      set({ "n", "x" }, "<C-q>", mc.toggleCursor)
+
+      mc.addKeymapLayer(function(layerSet)
+        layerSet({ "n", "x" }, "<Left>", mc.prevCursor)
+        layerSet({ "n", "x" }, "<Right>", mc.nextCursor)
+        layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
+        layerSet("n", "<Esc>", function()
+          if not mc.cursorsEnabled() then
+            mc.enableCursors()
+          else
+            mc.clearCursors()
+          end
+        end)
+      end)
+    end,
+  },
 }
