@@ -14,21 +14,33 @@ return {
  ft = { "html", "css", "javascript", "typescript", "jsx", "tsx" },
 },
 
+-- {
+--  "windwp/nvim-autopairs",
+--  event = "InsertEnter",
+--  config = function()
+--    require("nvim-autopairs").setup({
+--      check_ts = true,
+--      ts_config = {
+--        lua = {'string'},
+--        javascript = {'template_string'},
+--        java = false,
+--      }
+--    })
+--  end,
+-- },
 {
- "windwp/nvim-autopairs",
- event = "InsertEnter",
- config = function()
-   require("nvim-autopairs").setup({
-     check_ts = true,
-     ts_config = {
-       lua = {'string'},
-       javascript = {'template_string'},
-       java = false,
-     }
-   })
- end,
-},
-
+		"windwp/nvim-autopairs",
+		-- event = "InsertEnter",
+		-- opts = function() return require("config.nvim-autopairs") end,
+		config = function(_, opts)
+			require("nvim-autopairs").setup(opts)
+			local cmp_status_ok, cmp = pcall(require, "cmp")
+			local cmp_autopairs_status_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+			if cmp_status_ok and cmp_autopairs_status_ok then
+				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+			end
+		end,
+	},
 {
   "windwp/nvim-ts-autotag",
   dependencies = "nvim-treesitter/nvim-treesitter",
@@ -49,52 +61,51 @@ return {
   end,
 },
 
-  
-{
-  "neovim/nvim-lspconfig",
-  dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-  config = function()
-    require("mason").setup({
-      ensure_installed = {
-        "tree-sitter-cli",
-        "pyright",
-        "gopls",
-        "rust_analyzer",
-        "clangd",
-        "tailwindcss-language-server",
-      },
-    })
-
-    require("mason-lspconfig").setup()
-
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
-    local lspconfig = require("lspconfig")
-
-    lspconfig.pyright.setup({ capabilities = capabilities })
-    lspconfig.gopls.setup({ capabilities = capabilities })
-    lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-    lspconfig.clangd.setup({ capabilities = capabilities })
-
-    lspconfig.tailwindcss.setup({
-      capabilities = capabilities,
-      root_dir = function(fname)
-        local root_pattern = require("lspconfig").util.root_pattern(
-          "tailwind.config.cjs",
-          "tailwind.config.js",
-          "postcss.config.js"
-        )
-        return root_pattern(fname)
-      end,
-      filetypes = { "html", "javascript", "typescript", "jsx", "tsx", "vue", "svelte", "css" },
-    })
-  end
-},
-
-  
-
+-- {
+--   "neovim/nvim-lspconfig",
+--   dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
+--   config = function()
+--     require("mason").setup({
+--       ensure_installed = {
+--         "tree-sitter-cli",
+--         "pyright",
+--         "gopls",
+--         "rust_analyzer",
+--         "clangd",
+--         "tailwindcss-language-server",
+--       },  
+--         automatic_installation = true,
+--     })
+--
+--     require("mason-lspconfig").setup()
+--
+--     local capabilities = require('cmp_nvim_lsp').default_capabilities()
+--     local lspconfig = require("lspconfig")
+--
+--     lspconfig.pyright.setup({ capabilities = capabilities })
+--     lspconfig.gopls.setup({ capabilities = capabilities })
+--     lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+--     lspconfig.clangd.setup({ capabilities = capabilities })
+--
+--     lspconfig.tailwindcss.setup({
+--       capabilities = capabilities,
+--       root_dir = function(fname)
+--         local root_pattern = require("lspconfig").util.root_pattern(
+--           "tailwind.config.cjs",
+--           "tailwind.config.js",
+--           "postcss.config.js"
+--         )
+--         return root_pattern(fname)
+--       end,
+--       filetypes = { "html", "javascript", "typescript", "jsx", "tsx", "vue", "svelte", "css" },
+--     })
+--   end
+-- },
   {
     "hrsh7th/nvim-cmp",
+    -- event = "InsertEnter",
     dependencies = {
+      "windwp/nvim-autopairs",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
@@ -114,12 +125,16 @@ return {
       },
     },
     config = function()
-      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       local cmp = require('cmp')
-      cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done()
-      )
+      -- cmp.event:on(
+      --   'confirm_done',
+      --   cmp_autopairs.on_confirm_done()
+      -- )
+      local ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+    if ok then
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    end
 
       local lspkind = require("lspkind")
       cmp.setup({
@@ -149,13 +164,6 @@ return {
     end
   },
 {
-  "kdheepak/lazygit.nvim",
-  keys = {
-    { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-  },
-},
-
-{
 "s1n7ax/nvim-window-picker",
 version = "v1.*",
 config = function()
@@ -173,6 +181,7 @@ config = function()
   })
 end,
 },
+  --goated typescript thing, never made me sad
 {
   "pmizio/typescript-tools.nvim",
   dependencies = {
@@ -183,68 +192,76 @@ end,
     require("typescript-tools").setup {}
   end,
 },
+-- {
+--   "nvim-treesitter/nvim-treesitter",
+--   config = function()
+--     require("nvim-treesitter.configs").setup {
+--       ensure_installed = { "html" },
+--       indent = { enable = true },
+--     }
+--   end,
+-- },
 {
-  "kawre/leetcode.nvim",
-  dependencies = {
-    "nvim-telescope/telescope.nvim", -- optional but recommended
-    "nvim-lua/plenary.nvim",         -- required
-    "MunifTanjim/nui.nvim",          -- UI
-    "nvim-treesitter/nvim-treesitter" -- syntax highlighting
-  },
-  opts = {
-    -- optional: set defaults here
-    lang = "cpp" -- or "python", "golang", etc.
-  },
-  config = function(_, opts)
-    require("leetcode").setup(opts)
-  end
-}
-,
-{
-  "nvim-treesitter/nvim-treesitter",
-  config = function()
-    require("nvim-treesitter.configs").setup {
-      ensure_installed = { "html" },
-      indent = { enable = true },
-    }
-  end,
-},
-  {
-    -- Tailwind CSS color preview
-    "NvChad/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup({
-        user_default_options = {
-          tailwind = true,  -- Enable Tailwind CSS color highlighting
-          mode = "background",
-        }
+    "catgoose/nvim-colorizer.lua",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      filetypes = { "*" },
+      user_default_options = {
+        tailwind = true,
+        mode = "background",
+        names = true,
+        rgb_fn = true,
+        hsl_fn = true,
+        css = true,
+        css_fn = true,
+      },
+    },
+    config = function(_, opts)
+      local ok, colorizer = pcall(require, "colorizer")
+      if not ok then return end
+      colorizer.setup(opts)
+
+      local ns = vim.api.nvim_create_namespace("ColorizerInlineSwatch")
+      local function add_swatch(buf)
+        vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+        local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+        for i, line in ipairs(lines) do
+          for s, e in line:gmatch("()#%x%x%x%x%x%x()") do
+            vim.api.nvim_buf_set_extmark(buf, ns, i - 1, e, {
+              virt_text = { { " ███", "Normal" } },
+              virt_text_pos = "inline",
+              hl_mode = "combine",
+              priority = 200,
+            })
+          end
+        end
+      end
+
+      local grp = vim.api.nvim_create_augroup("ColorizerInlineAttach", { clear = true })
+      vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "TextChangedI" }, {
+        group = grp,
+        callback = function(args) add_swatch(args.buf) end,
       })
-    end
+    end,
   },
-{
-	  'sheerun/vim-polyglot',
-	  config = function()
-		vim.g.polyglot_disabled = {}  
-	  end
-	},
-	{
-		"sbdchd/neoformat", 
-		config = function()
-		  vim.cmd([[
-			augroup fmt
-			  autocmd!
-			  autocmd BufWritePre * undojoin | Neoformat
-			augroup END
-		  ]])
-
-		  vim.g.neoformat_enabled_python = {'black'}
-		  vim.g.neoformat_enabled_javascript = {'prettier'}
-		  vim.g.neoformat_enabled_lua = {'stylua'}
-
-		  vim.g.neoformat_verbose = 1
-		  vim.g.neoformat_run_all_formatters = 1
-		end,
-	  },
+	-- {
+	-- 	"sbdchd/neoformat", 
+	-- 	config = function()
+	-- 	  vim.cmd([[
+	-- 		augroup fmt
+	-- 		  autocmd!
+	-- 		  autocmd BufWritePre * undojoin | Neoformat
+	-- 		augroup END
+	-- 	  ]])
+	--
+	-- 	  vim.g.neoformat_enabled_python = {'black'}
+	-- 	  vim.g.neoformat_enabled_javascript = {'prettier'}
+	-- 	  vim.g.neoformat_enabled_lua = {'stylua'}
+	--
+	-- 	  vim.g.neoformat_verbose = 1
+	-- 	  vim.g.neoformat_run_all_formatters = 1
+	-- 	end,
+	--   },
     {
       'smoka7/multicursors.nvim',
       event = 'VeryLazy',
