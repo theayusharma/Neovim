@@ -111,7 +111,7 @@ end,
         local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
         for i, line in ipairs(lines) do
           for s, e in line:gmatch("()#%x%x%x%x%x%x()") do
-            vim.api.nvim_buf_set_extmark(buf, ns, i - 1, e, {
+            vim.api.nvim_buf_set_extmark(buf, ns, i - 1, e - 1, {
               virt_text = { { " ███", "Normal" } },
               virt_text_pos = "inline",
               hl_mode = "combine",
