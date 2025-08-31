@@ -83,7 +83,7 @@ return {
           publish_diagnostic_on = "insert_leave",
           -- tsserver_path = ".npm/install/global/node_modules/typescript/bin/tsserver",
 
-          tsserver_path = vim.fn.expand("$HOME") .. "/.bun/install/global/node_modules/typescript/bin/tsserver",
+          -- tsserver_path = vim.fn.expand("$HOME") .. "/.bun/install/global/node_modules/typescript/bin/tsserver",
         }
       }
     end,
@@ -149,67 +149,6 @@ return {
       vim.g.neoformat_run_all_formatters = 1
     end,
   },
-  -- {
-  --   'smoka7/multicursors.nvim',
-  --   event = 'VeryLazy',
-  --   dependencies = {
-  --     'nvim-treesitter/nvim-treesitter',
-  --     'nvim-lua/plenary.nvim',
-  --     'nvimtools/hydra.nvim',
-  --   },
-  --   opts = {
-  --     -- Enable hints (this is the key setting!)
-  --     generate_hints = {
-  --       normal = true,
-  --       insert = true,
-  --       extend = true,
-  --       config = {
-  --         column_count = 1,           -- Single column for cleaner look
-  --         max_hint_length = 30,       -- Longer descriptions
-  --       }
-  --     },
-  --     -- Customize hint window appearance
-  --     hint_config = {
-  --       float_opts = {
-  --         border = 'rounded',         -- Nice border
-  --       },
-  --       position = 'bottom-right',    -- Position like which-key
-  --     },
-  --     -- Keep default keymaps simple
-  --     normal_keys = {},  -- Use defaults
-  --     insert_keys = {},  -- Use defaults
-  --     extend_keys = {},  -- Use defaults
-  --   },
-  --   cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor', 'MCword' },
-  --   keys = {
-  --     -- Simple VS Code-like keybindings
-  --     {
-  --       '<C-n>',
-  --       '<cmd>MCstart<cr>',
-  --       mode = 'n',
-  --       desc = 'Add cursor on word',
-  --     },
-  --     {
-  --       '<C-n>',
-  --       '<cmd>MCvisual<cr>',
-  --       mode = 'v',
-  --       desc = 'Add cursor on selection',
-  --     },
-  --     {
-  --       '<leader>ma',
-  --       '<cmd>MCpattern<cr>',
-  --       mode = 'n',
-  --       desc = 'Add cursors by pattern',
-  --     },
-  --     {
-  --       '<leader>mc',
-  --       '<cmd>MCclear<cr>',
-  --       mode = 'n',
-  --       desc = 'Clear all cursors',
-  --     },
-  --   },
-  -- },
-
   {
     "jake-stewart/multicursor.nvim",
     branch = "1.0",
@@ -266,4 +205,43 @@ return {
       end)
     end,
   },
+  {
+    "stevearc/oil.nvim",
+    dependencies = {
+      "echasnovski/mini.icons", -- or "nvim-tree/nvim-web-devicons"
+    },
+    opts = {
+      default_file_explorer = true,
+      use_default_keymaps = true,
+      watch_for_directory_changes = true,
+      columns = { "icon" },
+      view_options = {
+        show_hidden = true,
+      },
+      keymaps = {
+        ["<CR>"] = "actions.select",
+        ["q"] = "actions.close",
+        ["<BS>"] = "actions.parent",
+        ["<C-s>"] = "actions.select_split",
+        ["<C-v>"] = "actions.select_vsplit",
+        ["<C-t>"] = "actions.select_tab",
+      },
+    },
+    keys = {
+      { "-", "<cmd>Oil<cr>",         desc = "Open parent directory" },
+      { "_", "<cmd>Oil --float<cr>", desc = "Open Oil in floating window" },
+    },
+    config = function(_, opts)
+      require("oil").setup(opts)
+    end,
+  },
+{
+  "iamcco/markdown-preview.nvim",
+  cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  build = "cd app && yarn install",
+  init = function()
+    vim.g.mkdp_filetypes = { "markdown" }
+  end,
+  ft = { "markdown" },
+},
 }
