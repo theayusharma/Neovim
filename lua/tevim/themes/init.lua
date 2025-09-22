@@ -79,8 +79,10 @@ local compile = function()
 	end
 	local allThemes = {}
 	for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/tevim/themes/integrations")) do
-		for k, f in pairs(M.loadTb(vim.fn.fnamemodify(file, ":r"))) do
-			allThemes[k] = f
+		if not file:match(".bak") then
+			for k, f in pairs(M.loadTb(vim.fn.fnamemodify(file, ":r"))) do
+				allThemes[k] = f
+			end
 		end
 	end
 	for k, f in

@@ -127,7 +127,7 @@ local plugins = {
   {
     "folke/todo-comments.nvim",
     event = "BufReadPost",
-    cmd = "TodoTelescope",
+    cmd = "Todo",
     opts = { signs = false },
   },
   {
@@ -147,19 +147,19 @@ local plugins = {
 
       vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find Files" })
       vim.keymap.set("n", "<leader>fw", fzf.live_grep, { desc = "Live Grep" })
-      -- vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
-      -- vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Help Tags" })
-      -- vim.keymap.set("n", "<leader>fd", fzf.diagnostics_document, { desc = "Diagnostics" })
+      vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
+      vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Help Tags" })
+      vim.keymap.set("n", "<leader>fd", fzf.diagnostics_document, { desc = "Diagnostics" })
       vim.keymap.set("n", "<leader>fs", fzf.git_status, { desc = "Git Status" })
       vim.keymap.set("n", "<leader>fc", fzf.git_commits, { desc = "Git commits" })
     end,
   },
   -- {
-  -- 	"nvim-telescope/telescope.nvim",
-  -- 	cmd = "Telescope",
-  -- 	opts = function()
-  -- 		return require("tevim.plugins.configs.telescope")
-  -- 	end,
+  --  "nvim-telescope/telescope.nvim",
+  --  cmd = "Telescope",
+  --  opts = function()
+  --    return require("tevim.plugins.configs.telescope")
+  --  end,
   -- },
   -- {
   -- 	"lewis6991/gitsigns.nvim",
@@ -242,7 +242,7 @@ local plugins = {
   {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
-    opts = { filetypes_denylist = { "neo-tree", "Trouble", "DressingSelect", "TelescopePrompt" } },
+    opts = { filetypes_denylist = { "neo-tree", "Trouble", "DressingSelect", "fzf" } },
     config = function(_, opts)
       require("illuminate").configure(opts)
     end,
@@ -303,7 +303,7 @@ local plugins = {
         opts = function()
           require("nvim-autopairs").setup({
             fast_wrap = {},
-            disable_filetype = { "TelescopePrompt", "vim" }
+            disable_filetype = { "fzf", "vim" }
           })
         end,
       },

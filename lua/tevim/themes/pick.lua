@@ -1,89 +1,174 @@
-local pickers = require("telescope.pickers")
-local finders = require("telescope.finders")
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
-local conf = require("telescope.config").values
+local fzf = require("fzf-lua")
 local replaceword = require("tevim.core.utils").replaceword
 
 local M = {}
 
+-- Function to check if directory exists
+local function dir_exists(path)
+  local f = io.open(path, "r")
+  if f then
+    f:close()
+    return true
+  end
+  return false
+end
+
+-- Safely read directory contents
+local function safe_readdir(path)
+  if not dir_exists(path) then
+    return {}
+  end
+  local success, result = pcall(vim.fn.readdir, path)
+  if success then
+    return result
+  else
+    return {}
+  end
+end
+
 local themes = {}
-for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/tevim/themes/schemes")) do
-	table.insert(themes, vim.fn.fnamemodify(file, ":r"))
+local original_theme = vim.g.TeVimTheme
+
+-- Read themes from tevim directory
+local tevim_themes_path = vim.fn.stdpath("config") .. "/lua/tevim/themes/schemes"
+for _, file in ipairs(safe_readdir(tevim_themes_path)) do
+  table.insert(themes, vim.fn.fnamemodify(file, ":r"))
 end
-for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/custom/themes/schemes")) do
-	table.insert(themes, vim.fn.fnamemodify(file, ":r"))
+
+-- Read themes from custom directory
+local custom_themes_path = vim.fn.stdpath("config") .. "/lua/custom/themes/schemes"
+for _, file in ipairs(safe_readdir(custom_themes_path)) do
+  table.insert(themes, vim.fn.fnamemodify(file, ":r"))
 end
+
 table.sort(themes)
 
 M.setTheme = function(theme)
-	vim.g.TeVimTheme = theme
-	require("tevim.themes").setTermColors(theme)
-	require("plenary.reload").reload_module("tevim.themes")
-	require("tevim.themes").load()
-	replaceword(
-		"vim.g.TeVimTheme",
-		'"' .. vim.g.TeVimTheme .. '"',
-		'"' .. theme .. '"',
-		vim.fn.stdpath("config") .. "/lua/custom/options.lua"
-	)
+  if not theme or theme == "" then
+    return
+  end
+
+  vim.g.TeVimTheme = theme
+  local colors = require("tevim.themes").getCurrentTheme()
+
+  -- Safely call theme functions with error handling
+  local success, err = pcall(function()
+    require("tevim.themes").setTermColors(colors)
+    require("plenary.reload").reload_module("tevim.themes")
+    require("tevim.themes").load()
+    replaceword(
+      "vim.g.TeVimTheme",
+      '"' .. (original_theme or "") .. '"',
+      '"' .. theme .. '"',
+      vim.fn.stdpath("config") .. "/lua/custom/options.lua"
+    )
+  end)
+
+  if not success then
+    vim.notify("Error setting theme: " .. tostring(err), vim.log.levels.ERROR)
+  end
+end
+
+-- Preview function for live theme changes
+local function preview_theme(theme)
+  if not theme or theme == "" then
+    return
+  end
+
+  pcall(function()
+    vim.g.TeVimTheme = theme
+    local colors = require("tevim.themes").getCurrentTheme()
+    require("tevim.themes").setTermColors(colors)
+    require("plenary.reload").reload_module("tevim.themes")
+    require("tevim.themes").load()
+  end)
 end
 
 M.setup = function()
-	pickers
-		.new({
-			prompt_title = " TEVIM COLORSCHEMES",
-			layout_config = { height = 0.4, width = 0.2 },
-			finder = finders.new_table({ results = themes }),
-			sorter = conf.generic_sorter(),
-			attach_mappings = function(bufnr, map)
-				vim.schedule(function()
-					vim.api.nvim_create_autocmd("TextChangedI", {
-						buffer = bufnr,
-						callback = function()
-							if action_state.get_selected_entry() then
-								M.setTheme(action_state.get_selected_entry()[1])
-							end
-						end,
-					})
-				end)
-				map("i", "<CR>", function()
-					M.setTheme(action_state.get_selected_entry()[1])
-					actions.close(bufnr)
-				end)
+  if #themes == 0 then
+    vim.notify("No themes found", vim.log.levels.WARN)
+    return
+  end
 
-				map("i", "<Down>", function()
-					actions.move_selection_next(bufnr)
-					M.setTheme(action_state.get_selected_entry()[1])
-				end)
-				map("i", "<C-j>", function()
-					actions.move_selection_next(bufnr)
-					M.setTheme(action_state.get_selected_entry()[1])
-				end)
+  -- Store original theme for restoration on escape
+  original_theme = vim.g.TeVimTheme
 
-				map("i", "<Up>", function()
-					actions.move_selection_previous(bufnr)
-					M.setTheme(action_state.get_selected_entry()[1])
-				end)
-				map("i", "<C-k>", function()
-					actions.move_selection_previous(bufnr)
-					M.setTheme(action_state.get_selected_entry()[1])
-				end)
-				return true
-			end,
-		})
-		:find()
+  local opts = {
+    prompt = " TEVIM COLORSCHEMES> ",
+    winopts = {
+      height = 0.4,
+      width = 0.2,
+      title = " TEVIM COLORSCHEMES ",
+      title_pos = "center",
+    },
+    fzf_opts = {
+      ["--no-multi"] = true,
+      ["--layout"] = "reverse",
+      ["--preview-window"] = "hidden",
+    },
+    keymap = {
+      builtin = {
+        ["<esc>"] = function()
+          -- Restore original theme on escape
+          if original_theme then
+            preview_theme(original_theme)
+          end
+          return "abort"
+        end,
+      },
+    },
+    actions = {
+      ["default"] = function(selected)
+        if selected and #selected > 0 then
+          M.setTheme(selected[1])
+        end
+      end,
+    },
+    previewer = {
+      function(selected)
+        if selected then
+          preview_theme(selected[1])
+        end
+      end
+    }
+  }
+
+  fzf.fzf_exec(themes, opts)
 end
 
 M.toggleTransparency = function()
-	vim.g.transparency = not vim.g.transparency
-	require("tevim.themes").load()
-	replaceword(
-		"vim.g.transparency",
-		tostring(not vim.g.transparency),
-		tostring(vim.g.transparency),
-		vim.fn.stdpath("config") .. "/lua/custom/options.lua"
-	)
+  vim.g.transparency = not vim.g.transparency
+
+  local success, err = pcall(function()
+    -- Validate that theme loading functions exist and work properly
+    local themes_module = require("tevim.themes")
+
+    if themes_module and type(themes_module.load) == "function" then
+      themes_module.load()
+    else
+      error("tevim.themes.load function not available")
+    end
+
+    -- Only try to replace if replaceword function exists
+    if replaceword and type(replaceword) == "function" then
+      replaceword(
+        "vim.g.transparency",
+        tostring(not vim.g.transparency),
+        tostring(vim.g.transparency),
+        vim.fn.stdpath("config") .. "/lua/custom/options.lua"
+      )
+    else
+      vim.notify("replaceword function not available, transparency setting not saved", vim.log.levels.WARN)
+    end
+  end)
+
+  if not success then
+    vim.notify("Error toggling transparency: " .. tostring(err), vim.log.levels.ERROR)
+    -- Revert transparency change if there was an error
+    vim.g.transparency = not vim.g.transparency
+  else
+    vim.notify("Transparency toggled: " .. tostring(vim.g.transparency), vim.log.levels.INFO)
+  end
 end
 
 return M

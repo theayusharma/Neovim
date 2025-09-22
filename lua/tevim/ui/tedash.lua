@@ -12,8 +12,8 @@ local logo = {
 }
 
 local buttons = {
-	{ "  Find File", "󱁐 f f", "Telescope find_files" },
-	{ "󰈚  TODO List", "󱁐 f t", "TodoTelescope" },
+	{ "  Find File", "󱁐 f f", "FzfLua files" },
+	{ "󰈚  TODO List", "󱁐 f t", "FzfLua todo" },
 	{ "  TeVim Themes", "󱁐 f c", "TeVimThemes" },
 	{ "󰒲  Lazy", "󱁐 p S", "Lazy show" },
 	{ "  Quit", "󱁐 q", "q" },
