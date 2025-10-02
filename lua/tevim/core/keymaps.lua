@@ -8,18 +8,18 @@ map({ "n", "v" }, "<C-x>", "d", opts, { desc = "Cut" })
 map({ "n", "v", "i" }, "<C-z>", "<cmd>undo<CR>", opts, { desc = "Undo" })
 
 map(
-	"n",
-	"j",
-	'v:count || mode(1)[0:1] == "no" ? "j" : "gj"',
-	{ expr = true },
-	{ desc = "Move Cursor Down (Allow Wrapped)" }
+  "n",
+  "j",
+  'v:count || mode(1)[0:1] == "no" ? "j" : "gj"',
+  { expr = true },
+  { desc = "Move Cursor Down (Allow Wrapped)" }
 )
 map(
-	"n",
-	"k",
-	'v:count || mode(1)[0:1] == "no" ? "k" : "gk"',
-	{ expr = true },
-	{ desc = "Move Cursor Up (Allow Wrapped)" }
+  "n",
+  "k",
+  'v:count || mode(1)[0:1] == "no" ? "k" : "gk"',
+  { expr = true },
+  { desc = "Move Cursor Up (Allow Wrapped)" }
 )
 
 map("n", "<C-h>", "<C-w>h", opts, { desc = "Move Cursor Left Buffer" })
@@ -58,13 +58,13 @@ map({ "n", "v" }, "<Leader>pu", "<cmd>Lazy update<CR>", opts, { desc = "Lazy Upd
 -- Options:
 map({ "n", "v" }, "<Leader>oa", "<cmd>Ranger<CR>", opts, { desc = "Ranger" })
 map({ "n", "v" }, "<Leader>ow", "<cmd>lua require('tevim.core.utils').toggle_option('wrap')<CR>", opts,
-	{ desc = "Toggle Wrap" })
+  { desc = "Toggle Wrap" })
 map({ "n", "v" }, "<Leader>os", "<cmd>lua require('tevim.core.utils').toggle_option('spell')<CR>", opts,
-	{ desc = "Toggle Spell" })
+  { desc = "Toggle Spell" })
 map({ "n", "v" }, "<Leader>on", "<cmd>lua require('tevim.core.utils').toggle_option('number')<CR>", opts,
-	{ desc = "Toggle Number" })
+  { desc = "Toggle Number" })
 map({ "n", "v" }, "<Leader>or", "<cmd>lua require('tevim.core.utils').toggle_option('relativenumber')<CR>", opts,
-	{ desc = "Toggle Relative Number" })
+  { desc = "Toggle Relative Number" })
 
 -- Windows:
 map({ "n", "v" }, "<Leader>wv", "<C-w>v", opts, { desc = "Vertical Split" })
@@ -115,7 +115,7 @@ map({ "n", "v" }, "<Leader>gd", "<cmd>Gitsigns diffthis HEAD<CR>", opts, { desc 
 -- LSP:
 map({ "n", "v" }, "<Leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts, { desc = "Code Action" })
 map({ "n", "v" }, "<Leader>li", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", opts,
-	{ desc = "Toggle InlayHints" })
+  { desc = "Toggle InlayHints" })
 map({ "n", "v" }, "<Leader>lI", "<cmd>LspInfo<CR>", opts, { desc = "Info" })
 map({ "n", "v" }, "<Leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>", opts, { desc = "Next Diagnostic" })
 map({ "n", "v" }, "<Leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<CR>", opts, { desc = "Prev Diagnostic" })
@@ -137,7 +137,7 @@ map({ "n", "v" }, "<Leader>t3", "<cmd>3ToggleTerm<CR>", opts, { desc = "Terminal
 map({ "n", "v" }, "<Leader>t4", "<cmd>4ToggleTerm<CR>", opts, { desc = "Terminal 4" })
 map({ "n", "v" }, "<Leader>tf", "<cmd>ToggleTerm direction=float<CR>", opts, { desc = "Float Terminal" })
 map({ "n", "v" }, "<Leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<CR>", opts,
-	{ desc = "Horizontal Terminal" })
+  { desc = "Horizontal Terminal" })
 map({ "n", "v" }, "<Leader>tv", "<cmd>ToggleTerm size=50 direction=vertical<CR>", opts, { desc = "Vertical Terminal" })
 
 -- TeVim:
