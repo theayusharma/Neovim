@@ -9,7 +9,7 @@
 
 </div>
 
-<img src="https://github.com/theayusharma/NeoVim/assets/90148193/dda6c61f-10a1-4317-8df2-561e3f961bd2">
+<img src="https://github.com/theayusharma/NeoVim/assets/neovim.png">
 
 <div align="center">
 
