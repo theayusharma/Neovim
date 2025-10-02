@@ -1,0 +1,285 @@
+-- return {
+--   "yetone/avante.nvim",
+--   event = "VeryLazy",
+--   lazy = false,
+--   version = false,
+--   opts = {
+--     provider = "copilot",
+--     auto_suggestions = false,
+--     copilot = {
+--       endpoint = "https://api.githubcopilot.com",
+--       model = "claude-sonnet-4",
+--       proxy = nil,
+--       allow_insecure = false,
+--       timeout = 30000,
+--       temperature = 0,
+--       max_tokens = 4096,
+--       ["local"] = false,
+--     },
+--     vendors = {
+--       copilot = {
+--         endpoint = "https://api.githubcopilot.com",
+--         model = "claude-sonnet-4",
+--         api_key_name = "GITHUB_TOKEN",
+--         temperature = 0,
+--         max_tokens = 4096,
+--         ["local"] = false,
+--       },
+--       gemini = {
+--         endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
+--         model = "gemini-2.5-pro",
+--         api_key_name = "GEMINI_API_KEY",
+--         temperature = 0,
+--         max_tokens = 4096,
+--         ["local"] = false,
+--       },
+--     },
+--     behaviour = {
+--       auto_suggestions = false,
+--       auto_set_highlight_group = true,
+--       auto_set_keymaps = true,
+--       auto_apply_diff_after_generation = false,
+--       support_paste_from_clipboard = false,
+--     },
+--     mappings = {
+--       diff = {
+--         ours = "co",
+--         theirs = "ct",
+--         all_theirs = "ca",
+--         both = "cb",
+--         cursor = "cc",
+--         next = "]x",
+--         prev = "[x",
+--       },
+--       suggestion = {
+--         accept = "<M-l>",
+--         next = "<M-]>",
+--         prev = "<M-[>",
+--         dismiss = "<C-]>",
+--       },
+--       jump = {
+--         next = "]]",
+--         prev = "[[",
+--       },
+--       submit = {
+--         normal = "<CR>",
+--         insert = "<C-s>",
+--       },
+--     },
+--     hints = { enabled = true },
+--     windows = {
+--       position = "right",
+--       wrap = true,
+--       width = 30,
+--       sidebar_header = {
+--         align = "center",
+--         rounded = true,
+--       },
+--     },
+--   },
+--   build = "make",
+--   dependencies = {
+--     "stevearc/dressing.nvim",
+--     "nvim-lua/plenary.nvim",
+--     "MunifTanjim/nui.nvim",
+--     "nvim-tree/nvim-web-devicons",
+--     "zbirenbaum/copilot.lua",
+--     {
+--       "HakonHarnes/img-clip.nvim",
+--       event = "VeryLazy",
+--       opts = {
+--         default = {
+--           embed_image_as_base64 = false,
+--           prompt_for_file_name = false,
+--           drag_and_drop = {
+--             insert_mode = true,
+--           },
+--           use_absolute_path = true,
+--         },
+--       },
+--     },
+--     {
+--       'MeanderingProgrammer/render-markdown.nvim',
+--       opts = {
+--         file_types = { "markdown", "Avante" },
+--       },
+--       ft = { "markdown", "Avante" },
+--     },
+--   },
+--   keys = {
+--     {
+--       "<leader>aa",
+--       function() require("avante.api").ask() end,
+--       desc = "Avante: Ask",
+--       mode = { "n", "v" },
+--     },
+--     {
+--       "<leader>ar",
+--       function() require("avante.api").refresh() end,
+--       desc = "Avante: Refresh",
+--       mode = "v",
+--     },
+--     {
+--       "<leader>ae",
+--       function() require("avante.api").edit() end,
+--       desc = "Avante: Edit",
+--       mode = "v",
+--     },
+--     {
+--       "<leader>at",
+--       function() require("avante").toggle() end,
+--       desc = "Avante: Toggle",
+--       mode = { "n", "v" },
+--     },
+--     {
+--       "<leader>ac",
+--       function() require("avante").chat() end,
+--       desc = "Avante: Chat",
+--       mode = { "n", "v" },
+--     },
+--     {
+--       "<leader>af",
+--       function() require("avante").focus() end,
+--       desc = "Avante: Focus",
+--       mode = { "n", "v" },
+--     },
+--     {
+--       "<leader>ad",
+--       function() require("avante").debug() end,
+--       desc = "Avante: Debug",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ah",
+--       function() require("avante").history() end,
+--       desc = "Avante: History",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>as",
+--       function() require("avante").switch_provider() end,
+--       desc = "Avante: Switch Provider (Gemini/Copilot)",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ag",
+--       function()
+--         vim.g.avante_provider = "gemini"
+--         print("Switched to Gemini provider")
+--       end,
+--       desc = "Avante: Switch to Gemini",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ap",
+--       function()
+--         vim.g.avante_provider = "copilot"
+--         print("Switched to Copilot provider")
+--       end,
+--       desc = "Avante: Switch to Copilot",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ac4",
+--       function()
+--         require("avante.config").override({ copilot = { model = "claude-sonnet-4" } })
+--         print("Switched to Claude Sonnet 4")
+--       end,
+--       desc = "Avante: Claude Sonnet 4",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ac3",
+--       function()
+--         require("avante.config").override({ copilot = { model = "claude-sonnet-3.5" } })
+--         print("Switched to Claude Sonnet 3.5")
+--       end,
+--       desc = "Avante: Claude Sonnet 3.5",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ac7",
+--       function()
+--         require("avante.config").override({ copilot = { model = "claude-sonnet-3.7" } })
+--         print("Switched to Claude Sonnet 3.7")
+--       end,
+--       desc = "Avante: Claude Sonnet 3.7",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>aco",
+--       function()
+--         require("avante.config").override({ copilot = { model = "claude-opus-4" } })
+--         print("Switched to Claude Opus 4")
+--       end,
+--       desc = "Avante: Claude Opus 4",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ag4",
+--       function()
+--         require("avante.config").override({ copilot = { model = "gpt-4.1" } })
+--         print("Switched to GPT 4.1")
+--       end,
+--       desc = "Avante: GPT 4.1",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ag0",
+--       function()
+--         require("avante.config").override({ copilot = { model = "gpt-4o" } })
+--         print("Switched to GPT 4o")
+--       end,
+--       desc = "Avante: GPT 4o",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ao3",
+--       function()
+--         require("avante.config").override({ copilot = { model = "o3" } })
+--         print("Switched to o3")
+--       end,
+--       desc = "Avante: o3",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>ao4",
+--       function()
+--         require("avante.config").override({ copilot = { model = "o4-mini" } })
+--         print("Switched to o4-mini")
+--       end,
+--       desc = "Avante: o4-mini",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>agm",
+--       function()
+--         require("avante.config").override({ copilot = { model = "gemini-2.5-pro" } })
+--         print("Switched to Gemini 2.5 Pro")
+--       end,
+--       desc = "Avante: Gemini 2.5 Pro (via Copilot)",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>agf",
+--       function()
+--         require("avante.config").override({ copilot = { model = "gemini-2.0-flash" } })
+--         print("Switched to Gemini 2.0 Flash")
+--       end,
+--       desc = "Avante: Gemini 2.0 Flash (via Copilot)",
+--       mode = "n",
+--     },
+--     {
+--       "<leader>aq",
+--       function() require("avante").quick_chat() end,
+--       desc = "Avante: Quick Chat",
+--       mode = { "n", "v" },
+--     },
+--     {
+--       "<leader>ax",
+--       function() require("avante").clear() end,
+--       desc = "Avante: Clear Chat",
+--       mode = "n",
+--     },
+--   },
+-- }
