@@ -4,3 +4,4 @@ spell
 lazy-lock.json
 #custom
 *.vim
+.github/

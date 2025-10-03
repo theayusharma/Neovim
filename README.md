@@ -1,4 +1,4 @@
-<h1 align="center">TeVim</h1>
+<h1 align="center">NeoVim Web Dev Edition (TeVim)</h1>
 
 <div align="center">
 
@@ -9,7 +9,7 @@
 
 </div>
 
-<img src="https://github.com/theayusharma/NeoVim/assets/neovim.png">
+<img src=".github/assets/neovim.png">
 
 <div align="center">
 
