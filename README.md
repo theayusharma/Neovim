@@ -14,9 +14,8 @@
 <div align="center">
 
 ```txt
-Performance for time startup on low laptop
-On Power                              : 15ms - 20ms
-On Battery                            : 17ms - 21ms
+Performance for time startup on laptop
+LazyStart                           : 14ms - 20ms
 UiEnter                              : 70ms - 100ms
 ```
 
@@ -95,16 +94,6 @@ UiEnter                              : 70ms - 100ms
 
 <br>
 
-<h3> ENJOY WITH TEVIM ! 🎉 </h3>
-
-<br>
-
-> **NOTE:**
->
-> TeVim auto create Custom Folder, change or add everything on it.
->
-> THIS IS NOT A "DISTRO" and not for BEGINNERS, you need to have some experiences with Lua and Neovim.
->
 ## Plugins
 
 | Plugin (~30 plugs)                                                                    | Description                                                    |  Lazy   |
@@ -163,34 +152,9 @@ UiEnter                              : 70ms - 100ms
 | <kbd>LDR</kbd> <kbd>f</kbd> <kbd>w</kbd> | Find File By String |
 | <kbd>LDR</kbd> <kbd>f</kbd> <kbd>t</kbd> | TODO |
 
-#### LSP
-
-| Keys        | Function          |
-| ------------- |-------------|
-| <kbd>LDR</kbd> <kbd>l</kbd> <kbd>a</kbd>  | Code Action |
-| <kbd>LDR</kbd> <kbd>l</kbd> <kbd>o</kbd>  | Outline |
-| <kbd>LDR</kbd> <kbd>l</kbd> <kbd>i</kbd>  | Lsp Infor |
-| <kbd>LDR</kbd> <kbd>l</kbd> <kbd>r</kbd>  | Lsp Rename |
-
-#### Treesitter
-
-| Keys        | Function          |
-| ------------- |-------------|
-| <kbd>LDR</kbd> <kbd>s</kbd> <kbd>i</kbd> | Treesitter Info |
-| <kbd>LDR</kbd> <kbd>s</kbd> <kbd>u</kbd> | Treesitter Update |
-
-#### TeVim
-
-| Keys        | Function          |
-| ------------- |-------------|
-| <kbd>LDR</kbd> <kbd>LDR</kbd> <kbd>u</kbd> | TeVim Update |
-| <kbd>LDR</kbd> <kbd>LDR</kbd> <kbd>c</kbd> | TeVim Colorscheme Picker |
-| <kbd>LDR</kbd> <kbd>LDR</kbd> <kbd>t</kbd> | Toggle Transparency |
-| <kbd>LDR</kbd> <kbd>LDR</kbd> <kbd>m</kbd> | TeVim Check Mason |
-
 <br>
 
-> Use **Telescope keymaps** for more keybinds
+> More keybinds at [keybinds](https://github.com/theayusharma/Neovim/blob/master/Keybind.md)
 
 <br>
 

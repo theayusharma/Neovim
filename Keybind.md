@@ -56,7 +56,7 @@
 | `<Leader>we` | Make Splits Equal  |
 | `<Leader>wq` | Close Split        |
 
-## Telescope
+## Fzf-lua(Telescope)
 
 | Key          | Description     |
 |--------------|-----------------|
