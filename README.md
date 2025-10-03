@@ -96,29 +96,23 @@ UiEnter                              : 70ms - 100ms
 
 ## Plugins
 
-| Plugin (~30 plugs)                                                                    | Description                                                    |  Lazy   |
-| ------------------------------------------------------------------------------------- | -------------------------------------------------------------- | :-----: |
-| [folke/lazy](https://github.com/folke/lazy.nvim)                                      | the package manager for newbies                                | `true`  |
-| [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | syntax highlighting, most popular one for neovim               | `true`  |
-| [HiPhish/rainbow-delimiters.nvim](https:://github.com/HiPhish/rainbow-delimiters.nvim)| highlights matching delimiters                                 | `true`  |
-| [NvChad/nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)             | highlights colors and is really frickin fast                   | `true`  |
-| [nvim-neo-tree/neo-tree.lua](https://github.com/nvim-neo-tree/neo-tree.nvim)          | a very neat, simple and clean file tree and most features      | `true`  |
-| [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)         | more devicons for neovim                                       | `true`  |
-| [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                   | automatically close and rename html tags                       | `true`  |
-| [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                     | automatically close and rename brackets                        | `true`  |
-| [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)     | probably the most popular menu. can be used for a lot of stuff | `true`  |
-| [akinsho/toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)                 | terminal integration in neovim                                 | `true`  |
-| [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                 | Super fast git decorations implemented purely in Lua.          | `true`  |
-| [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)                 | installing LSPs made super easy                                | `true`  |
-| [nvimdev/lspsaga.nvim](https://github.com/nvimdev/lspsaga.nvim)                       | responsible for the winbar and lightbulb                       | `true`  |
-| [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                     | the most popular LSP client for neovim                         | `true`  |
-| [hrsh7th/nvim-cmp](https:://github.com/hrsh7th/nvim-cmp)                              | autocompletion plugin for neovim                               | `true`  |
-| [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)                               | very simple and easy to use snippet engine                     | `true`  |
-| [RRethy/vim-illuminate](https://github.com/RRethy/vim-illuminate)                     | highlights all instances of the word under the cursor          | `true`  |
-| [lukas-reineke/indent-blankline.nvim](https:://github.com/lukas-reineke/indent-blankline.nvim)| shows indent lines in neovim                           | `true`  |
-| [echasnovski/mini.indentscope](https:://github.com/echasnovski/mini.indentscope)      | perfect animation indent lines                                 | `true`  |
-| [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                     | quik and easy commenting                                       | `true`  |
-| [folke/todo-comments.nvim](https://github.com/folke/todo-comments.nvim)               | beautiful highlights for TODO comments                         | `true`  |
+| Plugin                                                                              | Description                                                                 | Plugin                                                                                             | Description                                                                 |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [echasnovski/mini.nvim](https://github.com/echasnovski/mini.nvim)                     | Library of minimal, independent, and fast Lua modules                       | [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)         | More devicons for neovim                                                    |
+| [nvim-neo-tree/neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)         | A very neat, simple and clean file tree and most features                   | [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Shows indent lines in neovim                                                |
+| [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Syntax highlighting, most popular one for neovim                            | [folke/todo-comments.nvim](https://github.com/folke/todo-comments.nvim)               | Beautiful highlights for TODO comments                                      |
+| [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)                               | An improved and tightly integrated fzf experience within Neovim             | [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)                   | A Neovim plugin to improve the default vim.ui interfaces                    |
+| [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                     | Quick and easy commenting                                                   | [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                       | A Neovim plugin that shows a popup with keybindings                           |
+| [akinsho/toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)                 | Terminal integration in neovim                                              | [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                 | Super fast git decorations implemented purely in Lua                        |
+| [RRethy/vim-illuminate](https://github.com/RRethy/vim-illuminate)                     | Highlights all instances of the word under the cursor                       | [kevinhwang91/ufo.nvim](https://github.com/kevinhwang91/ufo.nvim)                     | A Neovim plugin that provides a foldable and scrollable buffer              |
+| [luukvbaal/statuscol.nvim](https://github.com/luukvbaal/statuscol.nvim)               | A configurable statuscolumn and click handlers                              | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                               | Autocompletion plugin for neovim                                            |
+| [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                     | The most popular LSP client for neovim                                      | [catgoose/nvim-colorizer prev nvchad/~](https://github.com/catgoose/nvim-colorizer.lua)             | Highlights colors and is really frickin fast                                |
+| [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)                   | A multiple cursors plugin for Vim and Neovim                                | [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)       | A markdown preview plugin for Vim and Neovim                                |
+| [karb94/neoscroll.nvim](https://github.com/karb94/neoscroll.nvim)                     | A Neovim plugin that provides smooth scrolling                              | [pmizio/typescript-tools.nvim](https://github.com/pmizio/typescript-tools.nvim)       | A Neovim plugin for TypeScript development                                  |
+| [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                   | Automatically close and rename html tags                                    | [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                     | Automatically close and rename brackets                                     |
+| [rmagatti/auto-session](https://github.com/rmagatti/auto-session)                     | A session manager for Neovim                                                | [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)                       | A UI component library for Neovim                                           |
+| [mattn/emmet-vim](https://github.com/mattn/emmet-vim)                                 | A Vim plugin that provides support for expanding abbreviations, similar to Emmet |
+
 
 ## Keybinds
 
