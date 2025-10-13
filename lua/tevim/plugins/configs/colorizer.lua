@@ -25,8 +25,8 @@ return {
       for i, line in ipairs(lines) do
         for s, e in line:gmatch("()#%x%x%x%x%x%x()") do
           vim.api.nvim_buf_set_extmark(buf, ns, i - 1, e - 1, {
-            virt_text = { { " ███", "Normal" } },
-            virt_text_pos = "inline",
+            -- virt_text = { { " ███", "Normal" } },
+            -- virt_text_pos = "inline",
             hl_mode = "combine",
             priority = 200,
           })
@@ -41,3 +41,4 @@ return {
     })
   end,
 }
+

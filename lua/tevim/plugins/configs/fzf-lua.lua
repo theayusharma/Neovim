@@ -10,7 +10,13 @@ return {
         width = 0.9,
         preview = { horizontal = 'right:60%' },
       },
-      -- fzf_opts = { ["--layout"] = "reverse" },
+      grep = {
+        rg_opts =
+        "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --no-ignore-parent -e",
+      },
+      files = {
+        rg_opts = "--color=never --files --hidden --follow --no-ignore-parent -g '!.git'",
+      },
     })
 
     vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find Files" })
