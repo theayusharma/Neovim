@@ -82,5 +82,9 @@ return
         "svelte",
       },
     })
+    lspconfig.biome.setup({
+      capabilities = capabilities,
+      root_dir = require("lspconfig.util").root_pattern("biome.json", "biome.jsonc", ".git"),
+    })
   end,
 }

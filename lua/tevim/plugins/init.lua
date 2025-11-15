@@ -26,11 +26,11 @@ local plugins = {
   require("tevim.plugins.configs.auto-session"), --for some reason left neotree gets a blank spave at top if i enavle this, but usefull plugin
   -- require("tevim.plugins.configs.window-picker"), i dont know what its need {
   -- require("tevim.plugins.configs.neoformat"), managed by built in formatter i guess , so no need of this
-  -- these might cause error, keep an eyey op 
-  --  mini.icons 
---     neoformat 
-  --   nvim-window-picker 
-    -- oil.nvim 
+  -- these might cause error, keep an eyey op
+  --  mini.icons
+  --     neoformat
+  --   nvim-window-picker
+  -- oil.nvim
 
   {
     "MunifTanjim/nui.nvim",
