@@ -20,7 +20,10 @@ return {
     })
 
     vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find Files" })
-    vim.keymap.set("n", "<leader>fw", fzf.live_grep, { desc = "Live Grep" })
+    -- vim.keymap.set("n", "<leader>fw", fzf.live_grep, { desc = "Live Grep" })
+    vim.keymap.set("n", "<leader>fw", function()
+      require("fzf-lua").grep({ search = "", no_esc = true })
+    end, { desc = "Live Grep" })
     vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
     vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Help Tags" })
     vim.keymap.set("n", "<leader>fd", fzf.diagnostics_document, { desc = "Diagnostics" })
