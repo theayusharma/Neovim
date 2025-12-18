@@ -5,3 +5,14 @@ lazy-lock.json
 #custom
 *.vim
 .github/
+nvim2/
+
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
+
