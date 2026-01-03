@@ -16,10 +16,10 @@ return {
       suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
       cwd_change_handling = true,
     })
-
-    vim.keymap.set("n", "<leader>so", "<cmd>SessionSearch<CR>", { desc = "Open Session" })
-    vim.keymap.set("n", "<leader>ss", "<cmd>SessionSave<CR>", { desc = "Save Session" })
-    vim.keymap.set("n", "<leader>sr", "<cmd>SessionRestore<CR>", { desc = "Restore Session" })
-    vim.keymap.set("n", "<leader>sd", "<cmd>SessionDelete<CR>", { desc = "Delete Session" })
+    local map = vim.keymap.set
+    map("n", "<leader>so", "<cmd>AutoSession search<CR>", { desc = "Open Session" })
+    map("n", "<leader>ss", "<cmd>AutoSession save<CR>", { desc = "Save Session" })
+    map("n", "<leader>sr", "<cmd>AutoSession restore<CR>", { desc = "Restore Session" })
+    map("n", "<leader>sd", "<cmd>AutoSession delete<CR>", { desc = "Delete Session" })
   end,
 }
