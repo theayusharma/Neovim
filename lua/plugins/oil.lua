@@ -1,30 +1,32 @@
 return {
   "stevearc/oil.nvim",
+  cmd = "Oil",
   dependencies = {
-    "nvim-mini/mini.icons", -- or "nvim-tree/nvim-web-devicons"
+    "nvim-mini/mini.icons",
   },
   opts = {
-    default_file_explorer = true,
     use_default_keymaps = true,
-    watch_for_directory_changes = true,
-    columns = { "icon" },
-    view_options = {
-      show_hidden = true,
-    },
     keymaps = {
-      ["<CR>"] = "actions.select",
       ["q"] = "actions.close",
-      ["<BS>"] = "actions.parent",
-      ["<C-s>"] = "actions.select_split",
-      ["<C-v>"] = "actions.select_vsplit",
-      ["<C-t>"] = "actions.select_tab",
+      ["<Esc>"] = "actions.close",
+    },
+    float = {
+      padding = 2,
+      max_width = 0.8,
+      max_height = 0.8,
+      border = "rounded",
+      win_options = {
+        winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+      },
     },
   },
   keys = {
-    { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
-    { "_", "<cmd>Oil --float<cr>", desc = "Open Oil in floating window" },
+    {
+      "-",
+      function()
+        require("oil").open_float()
+      end,
+      desc = "oil floating explorer",
+    },
   },
-  config = function(_, opts)
-    require("oil").setup(opts)
-  end,
 }
